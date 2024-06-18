@@ -1,9 +1,12 @@
 package com.openclassrooms.mddapi.models.dtos;
 
 
+import org.springframework.lang.NonNull;
+
 public class CommentDto {
     private Long commentId;
 
+    @NonNull
     private String content;
 
     private String createdAt;

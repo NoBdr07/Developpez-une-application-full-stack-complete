@@ -64,4 +64,9 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logoutUser() {
+        return ResponseEntity.ok(new MessageResponse("User logout successfully!"));
+    }
+
 }

@@ -38,4 +38,33 @@ public class PostMapper {
         }
         return postDtos;
     }
+
+    public Post dtoToPost(PostDto postDto) {
+        if (postDto == null) {
+            return null;
+        }
+
+        Post post = new Post();
+        post.setPostId(postDto.getPostId());
+        post.setTitle(postDto.getTitle());
+        post.setContent(postDto.getContent());
+        post.setUserId(postDto.getUserId());
+        post.setTopicId(postDto.getTopicId());
+        post.setCreatedAt(postDto.getCreatedAt());
+
+        return post;
+    }
+
+    public List<Post> dtoListToPost(List<PostDto> postDtos) {
+        List<Post> posts = new ArrayList<>();
+
+        for (PostDto postDto : postDtos) {
+            Post post = dtoToPost(postDto);
+
+            if (post != null) {
+                posts.add(post);
+            }
+        }
+        return posts;
+    }
 }

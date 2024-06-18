@@ -8,7 +8,7 @@ public interface UserService {
 
     Optional<User> getUserFromId(Long userId);
 
-    User saveUser(User user);
+    User save(User user);
 
     Optional<User> getUserByEmail(String email);
 
@@ -17,5 +17,7 @@ public interface UserService {
     boolean existsByEmail(String email);
 
     Optional<User>  findByLogin(String login);
+
+    Optional<User> getUserByUsername(String username);
 
 }

@@ -1,9 +1,12 @@
 package com.openclassrooms.mddapi.security.jwt;
 
+import com.openclassrooms.mddapi.models.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
@@ -26,6 +29,7 @@ public class JwtUtils {
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
+                .claim("login", userPrincipal.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
@@ -54,4 +58,5 @@ public class JwtUtils {
 
         return false;
     }
+
 }

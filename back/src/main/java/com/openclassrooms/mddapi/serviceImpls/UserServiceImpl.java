@@ -24,34 +24,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId);
     }
 
-    /**
-     * Save user
-     *
-     * @param user User to save
-     * @return User
-     */
-    public User saveUser(User user) {
+    public User save(User user) {
         return userRepository.save(user);
     }
 
-    /**
-     * Get user from email
-     *
-     * @param email Email of the user
-     * @return Optional<User>
-     */
+
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    /**
-     * Create user
-     *
-     * @param email email of user
-     * @param password password encoded
-     * @param username name of user
-     * @return User
-     */
+
     public User create(String email, String password, String username) {
         User newUser = new User();
         newUser.setEmail(email);
@@ -74,6 +56,10 @@ public class UserServiceImpl implements UserService {
             user = userRepository.findByUsername(login);
         }
         return user;
+    }
+
+    public Optional<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 }

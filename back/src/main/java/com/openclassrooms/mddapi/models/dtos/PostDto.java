@@ -1,15 +1,22 @@
 package com.openclassrooms.mddapi.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.lang.NonNull;
+
 public class PostDto {
 
     private Long postId;
 
+    @NonNull
     private String content;
 
+    @NonNull
     private String title;
 
     private Long userId;
 
+    @NonNull
+    @JsonProperty("topic_id")
     private Long topicId;
 
     private String createdAt;

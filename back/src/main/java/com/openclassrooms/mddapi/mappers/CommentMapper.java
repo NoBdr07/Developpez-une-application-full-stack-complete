@@ -37,4 +37,32 @@ public class CommentMapper {
         }
         return commentDtos;
     }
+
+    public Comment dtoToComment(CommentDto commentDto) {
+        if (commentDto == null) {
+            return null;
+        }
+
+        Comment comment = new Comment();
+        comment.setCommentId(commentDto.getCommentId());
+        comment.setContent(commentDto.getContent());
+        comment.setUserId(commentDto.getUserId());
+        comment.setPostId(commentDto.getPostId());
+        comment.setCreatedAt(commentDto.getCreatedAt());
+
+        return comment;
+    }
+
+    public List<Comment> dtoListToComment(List<CommentDto> commentDtos) {
+        List<Comment> comments = new ArrayList<>();
+
+        for (CommentDto commentDto : commentDtos) {
+            Comment comment = dtoToComment(commentDto);
+
+            if (comment != null) {
+                comments.add(comment);
+            }
+        }
+        return comments;
+    }
 }

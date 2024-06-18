@@ -4,9 +4,11 @@ import com.openclassrooms.mddapi.mappers.CommentMapper;
 import com.openclassrooms.mddapi.models.entities.Comment;
 import com.openclassrooms.mddapi.repositories.CommentRepository;
 import com.openclassrooms.mddapi.services.CommentService;
+import com.openclassrooms.mddapi.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public Comment saveComment(Comment comment) {
+        String formattedDate = DateUtils.formatToMySQLDateTime(new Date());
+        comment.setCreatedAt(formattedDate);
         return commentRepository.save(comment);
     }
 

@@ -17,6 +17,7 @@ public class TopicMapper {
         TopicDto topicDto = new TopicDto();
         topicDto.setTopicId(topic.getTopicId());
         topicDto.setName(topic.getName());
+        topicDto.setDescription(topic.getDescription());
 
         return topicDto;
     }
@@ -32,5 +33,31 @@ public class TopicMapper {
             }
         }
         return topicDtos;
+    }
+
+    public Topic dtoToTopic(TopicDto topicDto) {
+        if (topicDto == null) {
+            return null;
+        }
+
+        Topic topic = new Topic();
+        topic.setTopicId(topicDto.getTopicId());
+        topic.setName(topicDto.getName());
+        topic.setDescription(topicDto.getDescription());
+
+        return topic;
+    }
+
+    public List<Topic> dtoListToTopic(List<TopicDto> topicDtos) {
+        List<Topic> topics = new ArrayList<>();
+
+        for (TopicDto topicDto : topicDtos) {
+            Topic topic = dtoToTopic(topicDto);
+
+            if (topic != null) {
+                topics.add(topic);
+            }
+        }
+        return topics;
     }
 }
