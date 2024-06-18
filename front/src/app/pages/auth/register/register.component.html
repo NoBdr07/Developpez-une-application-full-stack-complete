@@ -1,0 +1,19 @@
+<form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+    <p id="title">Inscription</p>
+  
+    <div class="labelInput">
+      <label for="username">Nom d'utilisateur</label>
+      <input matInput formControlName="username" />
+    </div>
+    <div class="labelInput">
+        <label for="email">Adresse e-mail</label>
+        <input matInput formControlName="email" />
+      </div>
+    <div class="labelInput">
+      <label for="password">Mot de passe</label>
+      <input matInput formControlName="password"/>
+    </div>
+  
+    <button mat-raised-button color="primary" type="submit">S'inscrire</button>
+  </form>
+  

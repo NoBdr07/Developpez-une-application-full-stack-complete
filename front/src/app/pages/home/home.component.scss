@@ -5,3 +5,13 @@
   align-items: center;
   flex-direction: column;
 }
+
+#buttonContainer {
+  display : inline-block;
+}
+
+button {
+  margin: 50px;
+  border: solid 1px black;
+  box-shadow: none;
+}

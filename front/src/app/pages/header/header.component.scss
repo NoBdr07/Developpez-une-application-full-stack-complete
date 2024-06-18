@@ -1,0 +1,20 @@
+* {
+    width: 100%;
+    height: 94px;
+    border : solid black 2px;
+}
+
+#header {
+    
+    align-items: center;
+    justify-content: left;
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    width: 140px;
+    height: 81px;
+    display: block;
+    border : 0px;
+}

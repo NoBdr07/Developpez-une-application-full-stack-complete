@@ -1,0 +1,14 @@
+<form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+  <p id="title">Se connecter</p>
+
+  <div class="labelInput">
+    <label for="login">Email ou nom d'utilisateur</label>
+    <input matInput formControlName="login" />
+  </div>
+  <div class="labelInput">
+    <label for="password">Mot de passe</label>
+    <input matInput formControlName="password"/>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Se connecter</button>
+</form>
