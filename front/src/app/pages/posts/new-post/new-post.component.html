@@ -1,0 +1,16 @@
+<form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+  <p id="title">Créer un nouvel article</p>
+
+  <mat-form-field appearance="fill">
+    <mat-select placeholder="Sélectionner un thème"  formControlName="topic">
+      <mat-option *ngFor="let topic of topics$ | async" [value]="topic">
+        {{ topic.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <input matInput placeholder="Titre de l'article" formControlName="title" />
+  <textarea matInput class="content" placeholder="Contenu de l'article" formControlName="content"> </textarea>
+
+  <button mat-raised-button color="primary" type="submit">Créer</button>
+</form>

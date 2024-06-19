@@ -33,4 +33,5 @@ import { User } from '../interfaces/user.interface';
     private next(): void {
       this.isLoggedSubject.next(this.isLogged);
     }
+
   }

@@ -1,0 +1,74 @@
+* {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+#title {
+    font-size: 2rem;
+    margin : 30px;
+}
+
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 80%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size : 1.2rem;
+}
+
+input {
+    width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 0;
+    border: 1px solid #7550ec;
+    font-size: 1.2rem;
+    padding-left: 10px;
+}
+
+.content {
+    width: 310px;
+    border-radius: 5px;
+    border: 1px solid #7550ec;
+    font-size: 1.2rem;
+    padding-left : 10px;
+    padding-top: 10px;
+    height : 200px;
+    box-sizing: border-box;
+}
+
+
+button {
+    margin : 30px;
+    height: 45px;
+    width: 150px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+}
+
+mat-form-field {
+    width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 0;
+    border: 1px solid #7550ec;
+    font-size: 1.2rem;
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+::ng-deep mat-label {
+    color : #c4cad1;
+}
+
+::ng-deep .mat-form-field-flex {
+    background-color: white !important;
+    padding : 0 !important;
+    padding-top: 0px !important;
+}
+
+::ng-deep .mat-form-field-infix {
+    padding-top: 0px !important;
+}

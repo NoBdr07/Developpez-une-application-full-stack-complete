@@ -12,9 +12,17 @@ import { LayoutComponent } from './pages/auth/layout/layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { FeedComponent } from './pages/posts/feed/feed.component';
+import { NewPostComponent } from './pages/posts/new-post/new-post.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MeComponent } from './pages/auth/me/me.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, LayoutComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, LayoutComponent, FeedComponent, NewPostComponent, MeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,6 +30,11 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent],

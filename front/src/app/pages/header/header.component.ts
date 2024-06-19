@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isLogged: boolean | undefined ;
+
+
+  constructor(
+    private sessionService: SessionService
+  ) { }
 
   ngOnInit(): void {
+    this.sessionService.$isLogged().subscribe((isLogged: boolean) => {
+      this.isLogged = isLogged;
+    });
   }
 
 }

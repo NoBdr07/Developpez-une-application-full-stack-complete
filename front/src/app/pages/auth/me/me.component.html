@@ -1,0 +1,28 @@
+<form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+  <p class="title">Profil utilisateur</p>
+
+  <input matInput formControlName="username" />
+  <input matInput formControlName="email" />
+
+  <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+  <p id="logOut" (click)="logOut()">Se déconnecter</p>
+</form>
+
+<hr />
+
+<div id="topicContainer">
+  <p class="title">Abonnements</p>
+  <ng-container *ngIf="subscriptions$ | async as subs">
+    <div class="card-container">
+      <mat-card *ngFor="let topic of subs">
+        <mat-card-header>
+          <mat-card-title>{{ topic.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="content">{{topic.description}}</p>
+        </mat-card-content>
+        <button mat-raised-button color="primary" (click)="unsubscribe(topic.id)">Se désabonner</button>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>

@@ -34,9 +34,9 @@ export class LoginComponent {
         console.log(localStorage.getItem);
         this.authService.me().subscribe((user: User) => {
           this.sessionService.logIn(user);
-          this.router.navigate(['/posts'])
+          this.router.navigate(['/posts/feed'])
         });
-        this.router.navigate(['/posts'])
+        this.router.navigate(['/posts/feed'])
       },
       error => this.onError = true
     );

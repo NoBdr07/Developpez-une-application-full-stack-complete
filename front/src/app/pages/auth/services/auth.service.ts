@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AuthSuccess } from '../interfaces/authSucess.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { RegisterRequest } from '../interfaces/registerRequest.interface';
+import { UpdateRequest } from '../interfaces/updateRequest.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,9 @@ export class AuthService {
 
   public me(): Observable<User> {
     return this.http.get<User>(`${this.pathService}/me`);
+  }
+
+  public update(updateRequest: UpdateRequest): Observable<User> {
+    return this.http.put<User>(`${this.pathService}/me`, updateRequest);
   }
 }
