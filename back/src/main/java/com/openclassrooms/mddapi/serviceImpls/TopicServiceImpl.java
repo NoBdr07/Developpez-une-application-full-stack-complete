@@ -33,6 +33,10 @@ public class TopicServiceImpl implements TopicService {
         return topicRepository.findById(topicId);
     }
 
+    public List<Topic> getTopicsByIds(List<Long> topicIds) {
+        return topicRepository.findByTopicIdIn(topicIds);
+    }
+
     public void subscribe(Long topicId, Long userId) {
         Subscription sub = new Subscription();
         sub.setTopicId(topicId);

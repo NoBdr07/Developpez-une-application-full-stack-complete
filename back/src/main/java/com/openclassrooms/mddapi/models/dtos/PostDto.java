@@ -1,6 +1,8 @@
 package com.openclassrooms.mddapi.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.openclassrooms.mddapi.models.entities.Topic;
+import com.openclassrooms.mddapi.models.entities.User;
 import org.springframework.lang.NonNull;
 
 public class PostDto {
@@ -13,11 +15,10 @@ public class PostDto {
     @NonNull
     private String title;
 
-    private Long userId;
+    private User user;
 
     @NonNull
-    @JsonProperty("topic_id")
-    private Long topicId;
+    private Topic topic;
 
     private String createdAt;
 
@@ -45,20 +46,20 @@ public class PostDto {
         this.title = title;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getTopicId() {
-        return topicId;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public void setTopicId(Long topicId) {
-        this.topicId = topicId;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public String getCreatedAt() {

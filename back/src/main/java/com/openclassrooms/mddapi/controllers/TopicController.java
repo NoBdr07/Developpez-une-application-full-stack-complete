@@ -4,6 +4,7 @@ import com.openclassrooms.mddapi.mappers.TopicMapper;
 import com.openclassrooms.mddapi.models.dtos.TopicDto;
 import com.openclassrooms.mddapi.models.entities.User;
 import com.openclassrooms.mddapi.security.services.CustomUserDetailsService;
+import com.openclassrooms.mddapi.services.SubscriptionService;
 import com.openclassrooms.mddapi.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.CachingUserDetailsService;
@@ -21,6 +22,9 @@ public class TopicController {
     private TopicService topicService;
 
     @Autowired
+    private SubscriptionService subscriptionService;
+
+    @Autowired
     private TopicMapper topicMapper;
 
     @Autowired
@@ -29,6 +33,13 @@ public class TopicController {
     @GetMapping
     public List<TopicDto> getTopics() {
         return topicMapper.topicListToDto(topicService.getTopics());
+    }
+
+    @GetMapping("/subscriptions")
+    public List<TopicDto> getSubscriptions() {
+        Long userId = userDetailsService.getCurrentUserId();
+        List<Long> topicsId = subscriptionService.getSubscriptions(userId);
+        return topicMapper.topicListToDto(topicService.getTopicsByIds(topicsId));
     }
 
     @PostMapping("/{topicId}/subscribe")

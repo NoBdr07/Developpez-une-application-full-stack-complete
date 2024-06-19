@@ -11,7 +11,11 @@ public interface TopicService {
 
     Optional<Topic> getTopicById(Long topicId);
 
+    List<Topic> getTopicsByIds(List<Long> topicIds);
+
     void subscribe(Long topicId, Long userId);
 
     void unsubscribe(Long topicId, Long userId);
+
+
 }
