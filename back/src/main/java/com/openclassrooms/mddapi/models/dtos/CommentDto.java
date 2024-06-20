@@ -1,6 +1,8 @@
 package com.openclassrooms.mddapi.models.dtos;
 
 
+import com.openclassrooms.mddapi.models.entities.Post;
+import com.openclassrooms.mddapi.models.entities.User;
 import org.springframework.lang.NonNull;
 
 public class CommentDto {
@@ -11,9 +13,9 @@ public class CommentDto {
 
     private String createdAt;
 
-    private Long userId;
+    private User user;
 
-    private Long postId;
+    private Post post;
 
     public Long getCommentId() {
         return commentId;
@@ -39,19 +41,19 @@ public class CommentDto {
         this.createdAt = createdAt;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getPostId() {
-        return postId;
+    public Post getPost() {
+        return post;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 }

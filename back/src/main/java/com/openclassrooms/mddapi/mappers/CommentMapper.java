@@ -2,6 +2,9 @@ package com.openclassrooms.mddapi.mappers;
 
 import com.openclassrooms.mddapi.models.dtos.CommentDto;
 import com.openclassrooms.mddapi.models.entities.Comment;
+import com.openclassrooms.mddapi.services.PostService;
+import com.openclassrooms.mddapi.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +12,12 @@ import java.util.List;
 
 @Component
 public class CommentMapper {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PostService postService;
 
     public CommentDto commentToDto(Comment comment) {
         if (comment == null) {
@@ -18,8 +27,8 @@ public class CommentMapper {
         CommentDto commentDto = new CommentDto();
         commentDto.setCommentId(comment.getCommentId());
         commentDto.setContent(comment.getContent());
-        commentDto.setUserId(comment.getUserId());
-        commentDto.setPostId(comment.getPostId());
+        commentDto.setUser(userService.getUserFromId(comment.getUserId()).get());
+        commentDto.setPost(postService.getPost(comment.getPostId()).get());
         commentDto.setCreatedAt(comment.getCreatedAt());
 
         return commentDto;
@@ -46,8 +55,12 @@ public class CommentMapper {
         Comment comment = new Comment();
         comment.setCommentId(commentDto.getCommentId());
         comment.setContent(commentDto.getContent());
-        comment.setUserId(commentDto.getUserId());
-        comment.setPostId(commentDto.getPostId());
+        if (commentDto.getUser() != null) {
+            comment.setUserId(commentDto.getUser().getId());
+        }
+        if (commentDto.getPost() != null) {
+            comment.setPostId(commentDto.getPost().getPostId());
+        }
         comment.setCreatedAt(commentDto.getCreatedAt());
 
         return comment;
