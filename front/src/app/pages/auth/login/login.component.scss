@@ -1,47 +1,59 @@
 * {
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+img {
+  margin: 30px;
+  position: absolute;
+}
+
+img:hover {
+  cursor: pointer;
 }
 
 #title {
-    font-size: 2rem;
-    margin : 30px;
+  font-size: 2rem;
+  margin: 30px;
 }
 
-
 .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 60%;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size : 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 60%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
 }
 
 input {
-    width: 300px;
-    height: 50px;
-    border-radius: 5px;
-    margin-top: 0;
-    border: 1px solid black;
-    font-size: 1.2rem;
+  width: 300px;
+  height: 50px;
+  border-radius: 5px;
+  margin-top: 0;
+  border: 1px solid black;
+  font-size: 1.2rem;
 }
 
 button {
-    margin : 30px;
-    height: 45px;
-    width: 150px;
-    font-size: 1.2rem;
-    border-radius: 10px;
+  margin: 30px;
+  height: 45px;
+  width: 150px;
+  font-size: 1.2rem;
+  border-radius: 10px;
 }
 
 label {
-    margin-bottom: 0;
-    text-align: left;
+  margin-bottom: 0;
+  text-align: left;
 }
 
 .labelInput {
-    display :flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.errorMessage {
+    color: red;
 }

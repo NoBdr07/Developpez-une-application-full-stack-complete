@@ -1,19 +1,26 @@
+<img src="assets/back.png" alt="back" (click)="back()" />
 <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
     <p id="title">Inscription</p>
   
     <div class="labelInput">
       <label for="username">Nom d'utilisateur</label>
       <input matInput formControlName="username" />
+      <p *ngIf="form.get('username')?.errors?.['required'] && form.get('username')?.touched" >Le nom d'utilisateur est requis.</p>
+      <p *ngIf="form.get('username')?.errors?.['minlength'] && form.get('username')?.touched" >Le nom d'utilisateur doit contenir au moins 4 caractères.</p>
     </div>
     <div class="labelInput">
         <label for="email">Adresse e-mail</label>
         <input matInput formControlName="email" />
+        <p *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched" >L'adresse e-mail est requise.</p>
+        <p *ngIf="form.get('email')?.errors?.['email'] && form.get('email')?.touched" >L'adresse e-mail n'est pas valide.</p>
       </div>
     <div class="labelInput">
       <label for="password">Mot de passe</label>
       <input matInput formControlName="password"/>
+      <p *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched" >Le mot de passe est requis.</p>
+      <p *ngIf="form.get('password')?.errors?.['minlength'] && form.get('password')?.touched" >Le mot de passe doit contenir au moins 8 caractères.</p>
+      <p *ngIf="form.get('password')?.errors?.['pattern'] && form.get('password')?.touched" >Le mot de passe doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial.</p>
     </div>
   
-    <button mat-raised-button color="primary" type="submit">S'inscrire</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">S'inscrire</button>
   </form>
-  

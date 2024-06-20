@@ -2,6 +2,18 @@
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+img {
+    margin: 30px;
+    position: absolute;
+    @media (max-width: 768px) {
+        position: realtive;
+    }
+}
+
+img:hover {
+    cursor: pointer;
+}
+
 #title {
     font-size: 2rem;
     margin : 30px;
@@ -16,6 +28,9 @@
     height: 80%;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size : 1.2rem;
+    @media (max-width: 768px) {
+        margin-top: 60px;
+    }
 }
 
 input {
@@ -71,4 +86,8 @@ mat-form-field {
 
 ::ng-deep .mat-form-field-infix {
     padding-top: 0px !important;
+}
+
+.invalidMessage {
+    color : red;
 }

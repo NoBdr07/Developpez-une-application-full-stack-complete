@@ -14,6 +14,10 @@ import { Post } from "src/app/interfaces/post.interface";
     public getPosts(): Observable<Post[]> {
       return this.http.get<Post[]>(`${this.pathService}`);
     }
+
+    public getPost(postId: number): Observable<Post> {
+      return this.http.get<Post>(`${this.pathService}/${postId}`);
+    }
   
     public createPost(post: Post): Observable<Post> {
       console.log(post);

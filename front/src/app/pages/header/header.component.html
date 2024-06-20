@@ -1,10 +1,28 @@
 <div id="header">
-  <img id="logo" src="/assets/logo_p6.png" alt="logo" />
+  <img
+    id="logo"
+    src="/assets/logo_p6.png"
+    alt="logo"
+    routerLink="/posts/feed"
+  />
+  <div id="menu" *ngIf="isLogged && isDesktop">
+    <a routerLink="/posts/feed" routerLinkActive="active">Articles</a>
+    <a routerLink="/topics" routerLinkActive="active">Thèmes</a>
+    <img *ngIf="!isAuthMePage()" id="user" src="/assets/user.png" routerLink="/auth/me" />
+    <img *ngIf="isAuthMePage()" id="user" src="/assets/user-violet.png" routerLink="/auth/me" />
+  </div>
 
-  <div id="menu" *ngIf="isLogged">
-    <a routerLink="/posts/feed" routerLinkActive="active" >Articles</a>
-    <a routerLink="/posts/topics" routerLinkActive="active" >Thèmes</a>
-    <img id="user" src="/assets/user.png" routerLink="/auth/me"/>
-
+  <!-- Side bar for small screens -->
+  <div id="menuPhone" *ngIf="isLogged && !isDesktop">
+    <mat-icon (click)="toggleMenu()">menu</mat-icon>
+    <div id="sidebar" *ngIf="menuOpen" [class.open]="menuOpen">
+      <button mat-button (click)="toggleMenu()">Fermer</button>
+      <a routerLink="/posts/feed" routerLinkActive="active">Articles</a>
+      <a routerLink="/topics" routerLinkActive="active">Thèmes</a>
+      <img src="/assets/user.png" routerLink="/auth/me" />
+    </div>
   </div>
 </div>
+
+ <!-- To put the background in grey when menu is open -->
+<div class="sidebar-overlay" *ngIf="menuOpen"></div>

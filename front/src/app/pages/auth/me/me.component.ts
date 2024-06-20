@@ -6,7 +6,7 @@ import { LoginRequest } from 'src/app/pages/auth/interfaces/loginRequest.interfa
 import { AuthSuccess } from 'src/app/pages/auth/interfaces/authSucess.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
-import { TopicService } from '../../posts/services/topic.service';
+import { TopicService } from '../../topics/services/topic.service';
 import { UpdateRequest } from '../interfaces/updateRequest.interface';
 
 
@@ -39,10 +39,11 @@ export class MeComponent implements OnInit {
 
   public logOut(): void {
     this.sessionService.logOut();
-    this.router.navigate(['/auth/login']);  
+    this.router.navigate(['']);  
   }
 
   public unsubscribe(topicId: number): void {
+    console.log(topicId);
     this.topicService.unsubscribe(topicId).subscribe(
       () => this.subscriptions$ = this.topicService.getSubscriptions()
     );
@@ -55,7 +56,12 @@ export class MeComponent implements OnInit {
         email: user.email
       })
     });
-
+    //verification des subscription recuperees
+    this.subscriptions$.subscribe(
+      (topics) => {
+        console.log(topics);
+      }
+    );
     
   }
 

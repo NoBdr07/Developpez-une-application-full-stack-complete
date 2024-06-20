@@ -5,13 +5,13 @@
   <input matInput formControlName="email" />
 
   <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
-  <p id="logOut" (click)="logOut()">Se déconnecter</p>
+  <button class="btnLogOut" id="logOut" (click)="logOut()">Se déconnecter</button>
 </form>
 
 <hr />
 
-<div id="topicContainer">
-  <p class="title">Abonnements</p>
+<p class="title">Abonnements</p>
+<div id="topicContainer">  
   <ng-container *ngIf="subscriptions$ | async as subs">
     <div class="card-container">
       <mat-card *ngFor="let topic of subs">
@@ -21,7 +21,7 @@
         <mat-card-content>
           <p class="content">{{topic.description}}</p>
         </mat-card-content>
-        <button mat-raised-button color="primary" (click)="unsubscribe(topic.id)">Se désabonner</button>
+        <button mat-raised-button color="primary" (click)="unsubscribe(topic.topicId)">Se désabonner</button>
       </mat-card>
     </div>
   </ng-container>

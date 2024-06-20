@@ -2,6 +2,15 @@
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+img {
+    margin: 30px;
+    position: absolute;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
 #title {
     font-size: 2rem;
     margin : 30px;
@@ -13,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 60%;
+    height: 80%;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size : 1.2rem;
 }
@@ -38,10 +47,18 @@ button {
 label {
     margin-bottom: 0;
     text-align: left;
+    width: 305px;
+
 }
 
 .labelInput {
     display :flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 80%;
+}
+
+.invalidMessage {
+    color : red;
+
 }

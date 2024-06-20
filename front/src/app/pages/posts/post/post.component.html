@@ -1,0 +1,32 @@
+<div class="parentContainer">
+  <img id="back" src="assets/back.png" alt="back" (click)="back()" />
+  <div class="childContainer">
+    <div class="postContainer" *ngIf="post$ | async as post">
+      <p class="title">{{ post.title }}</p>
+      <div class="infoContainer">
+        <span>{{ post.createdAt | date }}</span>
+        <span>{{ post.user.username }}</span>
+        <span>{{ post.topic.name }}</span>
+      </div>
+      <p class="content">{{ post.content }}</p>
+    </div>
+
+    <hr />
+
+    <div class="commentContainer" *ngIf="comments$ | async as comments">
+      <p>Commentaires</p>
+      <div class="comment" *ngFor="let comment of comments">
+        <span>{{ comment.user.username }}</span>
+        <p class="commentContent">{{ comment.content }}</p>
+      </div>
+    </div>
+
+    <div class="newCommentContainer">
+      <textarea
+        [formControl]="newComment"
+        placeholder="Ecrivez ici votre commentaire"
+      ></textarea>
+      <img id="send" src="assets/fleche.png" alt="send" (click)="addComment()" />
+    </div>
+  </div>
+</div>

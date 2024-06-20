@@ -20,9 +20,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MeComponent } from './pages/auth/me/me.component';
+import { ListComponent } from './pages/topics/list/list.component';
+import { PostComponent } from './pages/posts/post/post.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, LayoutComponent, FeedComponent, NewPostComponent, MeComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, LayoutComponent, FeedComponent, NewPostComponent, MeComponent, ListComponent, PostComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,6 +38,7 @@ import { MeComponent } from './pages/auth/me/me.component';
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
+    MatIconModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent],

@@ -7,6 +7,9 @@ import { LayoutComponent } from './pages/auth/layout/layout.component';
 import { FeedComponent } from './pages/posts/feed/feed.component';
 import { NewPostComponent } from './pages/posts/new-post/new-post.component';
 import { MeComponent } from './pages/auth/me/me.component';
+import { ListComponent } from './pages/topics/list/list.component';
+import { AuthGuard } from './security/auth.guard';
+import { PostComponent } from './pages/posts/post/post.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
@@ -24,11 +27,21 @@ const routes: Routes = [
   {
     path: 'posts',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'feed', component: FeedComponent },
       { path: 'create', component: NewPostComponent },
+      { path: ':postId', component: PostComponent }
     ],
   },
+  {
+    path: 'topics',
+    component: LayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: ListComponent },
+    ],
+  }
 ];
 
 @NgModule({

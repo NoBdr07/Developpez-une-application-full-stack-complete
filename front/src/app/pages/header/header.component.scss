@@ -1,52 +1,124 @@
 * {
-    width: 100%;    
-    box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+img:hover {
+  cursor: pointer;
 }
 
 #header {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    overflow-x: hidden;
-    width: 100%;
-    border : solid black 2px;
-    height: 94px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
+  border-bottom: solid black 2px;
+  height: 94px;
 }
 
 #logo {
-    width: 140px;
-    height: 81px;
-    display: block;
-    border : 0px;
+  width: 140px;
+  height: 81px;
+  display: block;
+  border: 0px;
 }
 
 #menu {
-    display: flex;
-    align-items: center;
-    gap : 50px;
-    width: 30%;
-    justify-content: space-around;
-    margin-right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  width: 30%;
+  justify-content: space-around;
+  margin-right: 30px;
 }
 
 #user {
-    width : 60px;
-    height: 60px;    
+  width: 60px;
+  height: 60px;
 }
 
 #user:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 a {
-    text-decoration: none;
-    color: black;
-    font-size: 1.8rem;
-    font-weight: lighter;
+  text-decoration: none;
+  color: black;
+  font-size: 1.8rem;
+  font-weight: lighter;
 }
 
 .active {
-    color : #7550ec;
+  color: #7550ec;
 }
 
+mat-icon {
+  position: absolute;
+  right: 20px;
+  top: -10px;
+}
 
+#menuPhone {
+  position: relative;
+}
+
+#sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 200px; /* Largeur du menu latéral */
+  height: 70vh; /* Prend toute la hauteur de l'écran */
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border: solid black 1px;
+}
+
+#sidebar.open {
+  transform: translateX(0);
+  z-index: 100;
+}
+
+#sidebar a {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  text-align: end;
+  margin-right: 20px;
+}
+
+#sidebar img {
+  margin-top: auto;
+  margin-bottom: 20px;
+  height: 40px;
+  width: 40px;
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+  #header {
+    height: 70px;
+  }
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 191, 191, 0.5); 
+    z-index: 99; 
+    display: block;
+  }
+
+button {
+    font-family: Roboto;
+    font-weight: light;
+}

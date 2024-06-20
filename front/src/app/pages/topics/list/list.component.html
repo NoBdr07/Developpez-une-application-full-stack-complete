@@ -1,0 +1,13 @@
+<ng-container *ngIf="topicsSubs$ | async as topicList">
+    <div class="card-container">
+      <mat-card *ngFor="let topic of topicList">
+        <mat-card-header>
+          <mat-card-title>{{ topic.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ topic.description }}</p>
+        </mat-card-content>
+        <button mat-raised-button color="primary" [disabled]="topic.isSubscribed" (click)="subscribe(topic.topicId)">S'abonner</button>
+      </mat-card>
+    </div>
+  </ng-container>

@@ -7,7 +7,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { Topic } from 'src/app/interfaces/topic.interface';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
-import { TopicService } from 'src/app/pages/posts/services/topic.service';
+import { TopicService } from 'src/app/pages/topics/services/topic.service';
 
 @Component({
   selector: 'app-new-post',
@@ -19,9 +19,9 @@ export class NewPostComponent {
   topics$ = this.topicService.getTopics();
 
   public form = this.fb.group({
-    topic: [''],
-    title: [''],
-    content: ['']
+    topic: ['', Validators.required],
+    title: ['', [Validators.required, Validators.minLength(5)]],
+    content: ['', [Validators.required, Validators.minLength(50)]],
   });
 
   constructor(
@@ -39,6 +39,10 @@ export class NewPostComponent {
         this.router.navigate(['/posts/feed']);
       }
     );
+  }
+
+  back() {
+    window.history.back();
   }
 
 

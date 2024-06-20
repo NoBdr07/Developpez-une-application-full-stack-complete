@@ -1,3 +1,4 @@
+<img src="assets/back.png" alt="back" (click)="back()" />
 <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
   <p id="title">Créer un nouvel article</p>
 
@@ -10,7 +11,11 @@
   </mat-form-field>
 
   <input matInput placeholder="Titre de l'article" formControlName="title" />
+  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['required'] && form.get('title')?.touched" >Le titre est requis.</p>
+  
   <textarea matInput class="content" placeholder="Contenu de l'article" formControlName="content"> </textarea>
+  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['required'] && form.get('content')?.touched" >Le contenu est requis.</p>
+  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['minlength'] && form.get('content')?.touched" >Le contenu doit faire minimum 50 caractères.</p>
 
-  <button mat-raised-button color="primary" type="submit">Créer</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Créer</button>
 </form>

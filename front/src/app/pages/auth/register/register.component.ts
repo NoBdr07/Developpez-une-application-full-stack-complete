@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
-import { User } from 'src/app/interfaces/user.interface';
 import { RegisterRequest } from '../interfaces/registerRequest.interface';
 
 @Component({
@@ -22,18 +21,23 @@ export class RegisterComponent {
   ) {}
 
   public form = this.fb.group({
-    username: [''],
-    email: [''],
+    username: ['', [Validators.required, Validators.minLength(4)]],
+    email: ['', [Validators.required, Validators.email]],
     password: [
       '',
       [
         Validators.required,
+        Validators.minLength(8),
         Validators.pattern(
           '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,}$'
         ),
       ],
     ],
   });
+
+  back() {
+    window.history.back();
+  }
 
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;

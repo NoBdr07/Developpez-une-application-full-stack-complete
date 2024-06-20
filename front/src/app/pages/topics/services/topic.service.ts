@@ -19,6 +19,10 @@ import { Topic } from "src/app/interfaces/topic.interface";
       return this.http.get<Topic[]>(`${this.pathService}/subscriptions`);
     }
 
+    public subscribe(topicId: number): Observable<void> {
+      return this.http.post<void>(`${this.pathService}/${topicId}/subscribe`, {});
+    }
+
     public unsubscribe(topicId: number): Observable<void> {
       return this.http.delete<void>(`${this.pathService}/${topicId}/subscribe`);
     }

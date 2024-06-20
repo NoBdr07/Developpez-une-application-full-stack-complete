@@ -7,6 +7,10 @@ import { User } from '../interfaces/user.interface';
     providedIn: 'root'
   })
   export class SessionService {
+
+    constructor() {
+      this.checkTokenPresence();
+    }
   
     public isLogged = false;
     public user: User | undefined;
@@ -33,5 +37,12 @@ import { User } from '../interfaces/user.interface';
     private next(): void {
       this.isLoggedSubject.next(this.isLogged);
     }
+
+    // to avoid that isLogged become false on page refresh
+    private checkTokenPresence(): void {
+      const token = localStorage.getItem('token');
+      this.isLogged = !!token;
+      this.next();
+  }
 
   }

@@ -6,6 +6,7 @@
     font-size: 2rem;
     margin : 30px;
     font-weight: bold;
+    text-align: center;
 }
 
 .login-form {
@@ -31,7 +32,7 @@ input {
 button {
     margin : 30px;
     height: 45px;
-    width: 150px;
+    width: fit-content;
     font-size: 1.2rem;
     border-radius: 10px;
     margin-bottom: 0px;
@@ -47,7 +48,32 @@ hr {
 
 #topicContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin: 20px;
+    gap : 20px;
+}
+
+mat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+    background-color: rgb(248, 247, 247);
+    margin : 20px;
+}
+
+mat-card-header {
+    align-self: flex-start ;
+}
+
+.btnLogOut {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: none;
+}
+
+.btnLogOut:hover {
+    cursor: pointer;
 }
