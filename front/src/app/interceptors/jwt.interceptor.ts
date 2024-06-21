@@ -1,6 +1,8 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
+//configures an interceptor that automatically adds a JWT token to the headers 
+// of outgoing HTTP requests if a token is present in the localStorage.
 @Injectable({ providedIn: 'root' })
 export class JwtInterceptor implements HttpInterceptor {
   constructor() {}

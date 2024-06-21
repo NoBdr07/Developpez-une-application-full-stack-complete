@@ -11,8 +11,6 @@ import { ListComponent } from './pages/topics/list/list.component';
 import { AuthGuard } from './security/auth.guard';
 import { PostComponent } from './pages/posts/post/post.component';
 
-// consider a guard combined with canLoad / canActivate route option
-// to manage unauthenticated user to access private routes
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
