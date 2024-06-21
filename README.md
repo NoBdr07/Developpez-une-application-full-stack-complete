@@ -1,25 +1,65 @@
-# P6-Full-Stack-reseau-dev
+# MDD MVP Project
+## Description
 
-## Front
+This project is a comprehensive blogging platform allowing users to create accounts, log in, publish articles, comment on articles, and explore various topics. It includes both front-end (Angular) and back-end (Java 11, Spring Boot) components with REST APIs for data management. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+### Technologies
+#### Front-end
 
-Don't forget to install your node_modules before starting (`npm install`).
+**Framework:** Angular 14  
+**UI Library:** Angular Material  
 
-### Development server
+#### Back-end
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**Language:** Java 11  
+**Framework:** Spring Boot 2.7.3  
+**Security:** Spring Security and JWT  
+**Data Management:** Spring Data JPA and MySQL  
 
-### Build
+### Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Authentication and Registration  
+Feed Creation  
+Article Management  
+Responsive Design
 
-### Where to start
+## Installation
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+The detailled instructions for back and front are in their README.  
+But these are the general steps : 
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+1. **Clone the repository from GitHub:**  
+        - `git clone https://github.com/NoBdr07/Developpez-une-application-full-stack-complete/tree/main`
+    
+2. **Database Setup:** 
+        - Create a MySQL database (fullapp).  
+        - Import the database schema provided in the back directory.
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+3. **Set Up Back-end:**  
+        - Navigate to the back directory.  
+        - Ensure JDK 11+ and Maven are installed.  
+        - Install dependencies using `mvn clean install`.  
+        - Set up database configuration in application.properties.  
+        - Launch the API with `mvn spring-boot:run`.
 
-Good luck!
+
+4. **Set Up Front-end:**  
+        - Navigate to the front directory.  
+        - Install dependencies using `npm install`.  
+        - Start the app with npm start.
+
+    
+  
+
+## Architecture
+
+**Front-end**: Angular application structured into pages, components, services, and interceptors.  
+**Back-end:** Spring Boot application structured with controllers, services, repositories, security, and utility classes.
+
+## Definitions:
+
+**Post:** A user's article on a topic.  
+**Feed:** List of posts based on user-subscribed topics.  
+**Topic:** Broad categories within computer development.  
+**Comment:** User feedback on a post.  
+**Subscription:** When a user follows a topic.
