@@ -12,6 +12,7 @@
 
   <input matInput placeholder="Titre de l'article" formControlName="title" />
   <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['required'] && form.get('title')?.touched" >Le titre est requis.</p>
+  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['minlength'] && form.get('title')?.touched" >Le titre doit faire minimum 5 charactères.</p>
   
   <textarea matInput class="content" placeholder="Contenu de l'article" formControlName="content"> </textarea>
   <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['required'] && form.get('content')?.touched" >Le contenu est requis.</p>

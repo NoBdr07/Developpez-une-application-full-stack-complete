@@ -16,7 +16,7 @@
       </div>
     <div class="labelInput">
       <label for="password">Mot de passe</label>
-      <input matInput formControlName="password"/>
+      <input matInput formControlName="password" type="password"/>
       <p *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched" >Le mot de passe est requis.</p>
       <p *ngIf="form.get('password')?.errors?.['minlength'] && form.get('password')?.touched" >Le mot de passe doit contenir au moins 8 caractères.</p>
       <p *ngIf="form.get('password')?.errors?.['pattern'] && form.get('password')?.touched" >Le mot de passe doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial.</p>

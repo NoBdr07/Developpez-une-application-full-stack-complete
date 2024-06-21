@@ -4,9 +4,14 @@
 
 .title {
     font-size: 2rem;
-    margin : 30px;
+    margin: 30px;
     font-weight: bold;
     text-align: center;
+}
+
+.login-form, input, button, .btnLogOut {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1.2rem;
 }
 
 .login-form {
@@ -15,63 +20,59 @@
     align-items: center;
     justify-content: space-around;
     height: 60%;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size : 1.2rem;
 }
 
 input {
     width: 300px;
     height: 50px;
-    border-radius: 5px;
-    margin-top: 0;
     border: 2px solid #7550ec;
-    font-size: 1.2rem;
+    border-radius: 5px;
     padding-left: 10px;
 }
 
-button {
-    margin : 30px;
+button, .btnLogOut {
     height: 45px;
-    width: fit-content;
-    font-size: 1.2rem;
     border-radius: 10px;
-    margin-bottom: 0px;
+    background-color: white;
+    border: none;
+}
+
+button {
+    margin: 30px 30px 0;
+    width: fit-content;
 }
 
 #logOut {
-    color : #af2e21;
+    color: #af2e21;
 }
 
 hr {
     width: 80%;
 }
 
-#topicContainer {
+#topicContainer, .card-container {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
+}
+
+#topicContainer {
     margin: 20px;
-    gap : 20px;
 }
 
 mat-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    float: right;
     background-color: rgb(248, 247, 247);
-    margin : 20px;
+    margin: 10px;
+    flex: 0 0 300px;
 }
 
 mat-card-header {
-    align-self: flex-start ;
-}
-
-.btnLogOut {
-    margin-top: 0px;
-    margin-bottom: 20px;
-    background-color: white;
-    border: none;
+    align-self: flex-start;
 }
 
 .btnLogOut:hover {
