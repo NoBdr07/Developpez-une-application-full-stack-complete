@@ -23,6 +23,7 @@ public class JwtUtils {
     @Value("${oc.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    // Generate a token when user is valid
     public String generateJwtToken(Authentication authentication) {
 
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
@@ -36,10 +37,12 @@ public class JwtUtils {
                 .compact();
     }
 
+    // Get the username from the token
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    // Check if token is valid
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

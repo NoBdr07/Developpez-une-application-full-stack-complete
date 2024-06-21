@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.serviceImpls;
 
-import com.openclassrooms.mddapi.mappers.TopicMapper;
 import com.openclassrooms.mddapi.models.entities.Subscription;
 import com.openclassrooms.mddapi.models.entities.Topic;
 import com.openclassrooms.mddapi.repositories.SubscriptionRepository;
@@ -18,9 +17,6 @@ public class TopicServiceImpl implements TopicService {
 
     @Autowired
     private TopicRepository topicRepository;
-
-    @Autowired
-    private TopicMapper topicMapper;
 
     @Autowired
     private SubscriptionRepository subscriptionRepository;
@@ -44,6 +40,7 @@ public class TopicServiceImpl implements TopicService {
         subscriptionRepository.save(sub);
     }
 
+    // Is transactional to ensure data consistency if the delete fails
     @Transactional
     public void unsubscribe(Long topicId, Long userId) {
         subscriptionRepository.deleteByTopicIdAndUserId(topicId, userId);

@@ -22,6 +22,7 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    // Get current user information
     @GetMapping("/me")
     public UserDto getCurentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -35,11 +36,11 @@ public class UserController {
             return userMapper.userToDto(user);
         } else {
             // Handle the case where the Principal is not an instance of UserDetails
-            // For example, you can throw an exception or return an error response
             throw new RuntimeException("Principal is not an instance of UserDetails");
         }
     }
 
+    // User update its username or email or both
     @PutMapping("/me")
     public UserDto updateCurrentUser(@Valid @RequestBody UserDto userDto) {
 

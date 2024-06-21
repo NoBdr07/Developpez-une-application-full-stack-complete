@@ -28,6 +28,7 @@ public class PostController {
     @Autowired
     private SubscriptionService subscriptionService;
 
+    // Create a new post related to a specific user and a specific topic
     @PostMapping
     public void createPost(@Valid @RequestBody PostDto postDto) {
         // get the user id
@@ -39,6 +40,7 @@ public class PostController {
         postService.createPost(post);
     }
 
+    // Get all posts related to the user's subscriptions
     @GetMapping
     public List<PostDto> getPosts() {
         // get the user id
@@ -51,6 +53,7 @@ public class PostController {
         return postMapper.postListToDto(postService.getPostsByTopicIds(topicIds));
     }
 
+    // Get a specific post
     @GetMapping("/{postId}")
     public PostDto getPost(@PathVariable("postId") Long postId) {
         return postMapper.postToDto(postService.getPost(postId).get());

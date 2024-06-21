@@ -10,14 +10,11 @@ public interface UserService {
 
     User save(User user);
 
-    Optional<User> getUserByEmail(String email);
-
     User create(String email, String password, String name);
 
     boolean existsByEmail(String email);
 
     Optional<User>  findByLogin(String login);
 
-    Optional<User> getUserByUsername(String username);
 
 }

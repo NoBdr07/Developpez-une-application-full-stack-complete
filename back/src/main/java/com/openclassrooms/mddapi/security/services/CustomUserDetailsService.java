@@ -18,6 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    // Load user by login, it can be username or email, the login of checking login is in userService
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userService.findByLogin(login)
@@ -26,6 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 
+    // Method to get the current user id
     public Long getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails) authentication.getPrincipal()).getUsername();

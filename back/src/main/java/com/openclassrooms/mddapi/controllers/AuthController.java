@@ -38,6 +38,7 @@ public class AuthController {
     @Autowired
     private UserService userService ;
 
+    // Register new user
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
         if (userService.existsByEmail(registerRequest.getEmail())) {
@@ -51,6 +52,7 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
+    // Authenticate user
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getLogin());
@@ -63,6 +65,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
+    // Logout user
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser() {
         return ResponseEntity.ok(new MessageResponse("User logout successfully!"));
