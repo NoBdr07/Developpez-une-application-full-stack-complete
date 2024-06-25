@@ -22,7 +22,10 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    // Get current user information
+    /**
+     * Get the current user
+     * @return the current user
+     */
     @GetMapping("/me")
     public UserDto getCurentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -40,7 +43,11 @@ public class UserController {
         }
     }
 
-    // User update its username or email or both
+    /**
+     * Update the current user
+     * @param userDto the user to update
+     * @return the updated user
+     */
     @PutMapping("/me")
     public UserDto updateCurrentUser(@Valid @RequestBody UserDto userDto) {
 

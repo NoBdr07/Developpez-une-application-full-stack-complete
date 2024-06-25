@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.security.jwt;
 
+import com.openclassrooms.mddapi.exceptions.JwtTokenExpiredException;
 import com.openclassrooms.mddapi.models.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,11 @@ public class JwtUtils {
     @Value("${oc.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    // Generate a token when user is valid
+    /**
+     * Generate token
+     * @param authentication
+     * @return
+     */
     public String generateJwtToken(Authentication authentication) {
 
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
@@ -37,12 +42,20 @@ public class JwtUtils {
                 .compact();
     }
 
-    // Get the username from the token
+    /**
+     * Get login from token, it can be email or login
+     * @param token
+     * @return
+     */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // Check if token is valid
+    /**
+     * Validate token
+     * @param authToken
+     * @return
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
@@ -53,13 +66,12 @@ public class JwtUtils {
             logger.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
             logger.error("JWT token is expired: {}", e.getMessage());
+            throw new JwtTokenExpiredException("JWT token is expired");
         } catch (UnsupportedJwtException e) {
             logger.error("JWT token is unsupported: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
-
         return false;
     }
-
 }

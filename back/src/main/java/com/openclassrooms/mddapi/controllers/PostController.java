@@ -28,7 +28,10 @@ public class PostController {
     @Autowired
     private SubscriptionService subscriptionService;
 
-    // Create a new post related to a specific user and a specific topic
+    /**
+     * Create a new post
+     * @param postDto
+     */
     @PostMapping
     public void createPost(@Valid @RequestBody PostDto postDto) {
         // get the user id
@@ -40,7 +43,10 @@ public class PostController {
         postService.createPost(post);
     }
 
-    // Get all posts related to the user's subscriptions
+    /**
+     * Get all posts
+     * @return List<PostDto>
+     */
     @GetMapping
     public List<PostDto> getPosts() {
         // get the user id

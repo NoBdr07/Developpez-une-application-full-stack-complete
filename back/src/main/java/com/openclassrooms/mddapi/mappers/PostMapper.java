@@ -19,6 +19,11 @@ public class PostMapper {
     @Autowired
     private TopicService topicService;
 
+    /**
+     * Maps a Post entity to a PostDto
+     * @param post The Post entity to map
+     * @return The PostDto
+     */
     public PostDto postToDto(Post post) {
         if (post == null) {
             return null;
@@ -35,6 +40,10 @@ public class PostMapper {
         return postDto;
     }
 
+    /** Maps a list of Post entities to a list of PostDtos
+     * @param posts The list of Post entities to map
+     * @return The list of PostDtos
+     */
     public List<PostDto> postListToDto(List<Post> posts) {
         List<PostDto> postDtos = new ArrayList<>();
 
@@ -48,6 +57,11 @@ public class PostMapper {
         return postDtos;
     }
 
+    /**
+     * Maps a PostDto to a Post entity
+     * @param postDto The PostDto to map
+     * @return The Post entity
+     */
     public Post dtoToPost(PostDto postDto) {
         if (postDto == null) {
             return null;
@@ -61,6 +75,10 @@ public class PostMapper {
         return post;
     }
 
+    /** Maps a list of PostDtos to a list of Post entities
+     * @param postDtos The list of PostDtos to map
+     * @return The list of Post entities
+     */
     public List<Post> dtoListToPost(List<PostDto> postDtos) {
         List<Post> posts = new ArrayList<>();
 

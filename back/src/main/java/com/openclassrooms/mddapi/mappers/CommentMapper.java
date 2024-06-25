@@ -19,6 +19,11 @@ public class CommentMapper {
     @Autowired
     private PostService postService;
 
+    /**
+     * Maps a Comment entity to a CommentDto
+     * @param comment the Comment entity to map
+     * @return the CommentDto
+     */
     public CommentDto commentToDto(Comment comment) {
         if (comment == null) {
             return null;
@@ -34,6 +39,11 @@ public class CommentMapper {
         return commentDto;
     }
 
+    /**
+     * Maps a list of Comment entities to a list of CommentDtos
+     * @param comments the list of Comment entities to map
+     * @return the list of CommentDtos
+     */
     public List<CommentDto> commentListToDto(List<Comment> comments) {
         List<CommentDto> commentDtos = new ArrayList<>();
 
@@ -47,6 +57,11 @@ public class CommentMapper {
         return commentDtos;
     }
 
+    /**
+     * Maps a CommentDto to a Comment entity
+     * @param commentDto the CommentDto to map
+     * @return the Comment entity
+     */
     public Comment dtoToComment(CommentDto commentDto) {
         if (commentDto == null) {
             return null;
@@ -66,6 +81,11 @@ public class CommentMapper {
         return comment;
     }
 
+    /**
+     * Maps a list of CommentDtos to a list of Comment entities
+     * @param commentDtos the list of CommentDtos to map
+     * @return the list of Comment entities
+     */
     public List<Comment> dtoListToComment(List<CommentDto> commentDtos) {
         List<Comment> comments = new ArrayList<>();
 

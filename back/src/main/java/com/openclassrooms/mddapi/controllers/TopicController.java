@@ -30,13 +30,19 @@ public class TopicController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    // Get all topics
+    /**
+     * Get all topics
+     * @return List<TopicDto>
+     */
     @GetMapping
     public List<TopicDto> getTopics() {
         return topicMapper.topicListToDto(topicService.getTopics());
     }
 
-    // Get all topics related to the user's subscriptions
+    /**
+     * Get all topics the user has subscribed to
+     * @return List<TopicDto>
+     */
     @GetMapping("/subscriptions")
     public List<TopicDto> getSubscriptions() {
         Long userId = userDetailsService.getCurrentUserId();
@@ -44,7 +50,10 @@ public class TopicController {
         return topicMapper.topicListToDto(topicService.getTopicsByIds(topicsId));
     }
 
-    // Make the user subscribe to a topic
+    /**
+     * Create a new topic
+     * @param topicId
+     */
     @PostMapping("/{topicId}/subscribe")
     public void subscribe(@PathVariable("topicId") Long topicId) {
         Long userId = userDetailsService.getCurrentUserId();
@@ -52,12 +61,14 @@ public class TopicController {
         topicService.subscribe(topicId, userId);
     }
 
-    // Make the user unsubscribe from a topic
+    /**
+     * Delete a topic
+     * @param topicId
+     */
     @DeleteMapping("/{topicId}/subscribe")
     public void unsubscribe(@PathVariable("topicId") Long topicId) {
         Long userId = userDetailsService.getCurrentUserId();
 
         topicService.unsubscribe(topicId, userId);
     }
-
 }

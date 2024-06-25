@@ -15,6 +15,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
 
+    /**
+     * Get all subscriptions for a user
+     * @param userId The user id
+     * @return A list of topic ids
+     */
     public List<Long> getSubscriptions(Long userId) {
         List<Subscription> subscriptions = subscriptionRepository.findByUserId(userId);
         List<Long> topicIds = new ArrayList<>();
@@ -23,6 +28,4 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         }
         return topicIds;
     }
-
-
 }

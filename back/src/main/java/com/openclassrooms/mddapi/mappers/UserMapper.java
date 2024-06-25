@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
+    /** Maps a User entity to a UserDto
+     * @param user The User entity to map
+     * @return The UserDto
+     */
     public UserDto userToDto(User user) {
         if (user == null) {
             return null;

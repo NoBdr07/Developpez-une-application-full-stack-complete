@@ -5,7 +5,6 @@ import com.openclassrooms.mddapi.models.dtos.CommentDto;
 import com.openclassrooms.mddapi.models.entities.Comment;
 import com.openclassrooms.mddapi.security.services.CustomUserDetailsService;
 import com.openclassrooms.mddapi.services.CommentService;
-import com.openclassrooms.mddapi.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +23,12 @@ public class CommentController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @Autowired
-    private PostService postService;
-
-    // Create a new comment related to a specific post
+    /**
+     * Create a new comment
+     * @param postId
+     * @param commentDto
+     * @return CommentDto
+     */
     @PostMapping("/posts/{postId}/comments")
     public CommentDto createComment(@PathVariable("postId") Long postId, @RequestBody CommentDto commentDto) {
         Comment comment = commentMapper.dtoToComment(commentDto);
@@ -36,10 +37,13 @@ public class CommentController {
         return commentMapper.commentToDto(commentService.saveComment(comment));
     }
 
-    // Get all comments related to a specific post
+    /**
+     * Get all comments for a post
+     * @param postId
+     * @return List<CommentDto>
+     */
     @GetMapping("/posts/{postId}/comments")
     public List<CommentDto> getCommentsByPostId(@PathVariable("postId") Long postId) {
         return commentMapper.commentListToDto(commentService.findByPostId(postId));
     }
-
 }

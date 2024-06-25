@@ -16,14 +16,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Get user from id
+     * @param userId User id
+     * @return User
+     */
     public Optional<User> getUserFromId(Long userId) {
         return userRepository.findById(userId);
     }
 
+    /**
+     * Save user
+     * @param user User
+     * @return User
+     */
     public User save(User user) {
         return userRepository.save(user);
     }
 
+    /**
+     * Create user
+     * @param email User email
+     * @param password User password
+     * @param username User username
+     * @return User
+     */
     public User create(String email, String password, String username) {
         User newUser = new User();
         newUser.setEmail(email);
@@ -36,11 +53,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(newUser);
     }
 
+    /**
+     * Check if user exists by email
+     * @param email User email
+     * @return boolean
+     */
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
 
-    // Load user by login, it can be username or email
+    /**
+     * Check if user exists by login
+     * @param login User login, it can be email or username
+     * @return User
+     */
     public Optional<User> findByLogin(String login) {
         Optional<User> user = userRepository.findByEmail(login);
         if (user.isEmpty()) {

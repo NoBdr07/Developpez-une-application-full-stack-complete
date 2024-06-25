@@ -21,18 +21,37 @@ public class TopicServiceImpl implements TopicService {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
 
+    /**
+     * Get all topics
+     * @return List of topics
+     */
     public List<Topic> getTopics() {
         return topicRepository.findAll();
     }
 
+    /**
+     * Get a topic by its ID
+     * @param topicId The ID of the topic
+     * @return The topic
+     */
     public Optional<Topic> getTopicById(Long topicId) {
         return topicRepository.findById(topicId);
     }
 
+    /**
+     * Get topics by their IDs
+     * @param topicIds A list of topic IDs
+     * @return List of topics
+     */
     public List<Topic> getTopicsByIds(List<Long> topicIds) {
         return topicRepository.findByTopicIdIn(topicIds);
     }
 
+    /**
+     * Subscribe to a topic
+     * @param topicId The ID of the topic
+     * @param userId The ID of the user
+     */
     public void subscribe(Long topicId, Long userId) {
         Subscription sub = new Subscription();
         sub.setTopicId(topicId);
@@ -40,7 +59,12 @@ public class TopicServiceImpl implements TopicService {
         subscriptionRepository.save(sub);
     }
 
-    // Is transactional to ensure data consistency if the delete fails
+    /**
+     * Unsubscribe from a topic
+     * Is transactional to ensure data consistency if the delete fails
+     * @param topicId The ID of the topic
+     * @param userId The ID of the user
+     */
     @Transactional
     public void unsubscribe(Long topicId, Long userId) {
         subscriptionRepository.deleteByTopicIdAndUserId(topicId, userId);

@@ -9,6 +9,11 @@ import java.util.List;
 
 @Component
 public class TopicMapper {
+
+    /** Maps a Topic entity to a TopicDto
+     * @param topic The Topic entity to map
+     * @return The TopicDto
+     */
     public TopicDto topicToDto(Topic topic) {
         if (topic == null) {
             return null;
@@ -22,6 +27,10 @@ public class TopicMapper {
         return topicDto;
     }
 
+    /** Maps a list of Topic entities to a list of TopicDtos
+     * @param topics The list of Topic entities to map
+     * @return The list of TopicDtos
+     */
     public List<TopicDto> topicListToDto(List<Topic> topics) {
         List<TopicDto> topicDtos = new ArrayList<>();
 
@@ -35,6 +44,10 @@ public class TopicMapper {
         return topicDtos;
     }
 
+    /** Maps a TopicDto to a Topic entity
+     * @param topicDto The TopicDto to map
+     * @return The Topic entity
+     */
     public Topic dtoToTopic(TopicDto topicDto) {
         if (topicDto == null) {
             return null;
@@ -48,6 +61,10 @@ public class TopicMapper {
         return topic;
     }
 
+    /** Maps a list of TopicDtos to a list of Topic entities
+     * @param topicDtos The list of TopicDtos to map
+     * @return The list of Topic entities
+     */
     public List<Topic> dtoListToTopic(List<TopicDto> topicDtos) {
         List<Topic> topics = new ArrayList<>();
 
