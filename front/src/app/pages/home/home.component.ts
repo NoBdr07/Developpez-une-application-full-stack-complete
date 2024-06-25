@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+
+  sessionExpired = false;
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   login() {
     this.router.navigate(['auth/login']);
@@ -17,8 +21,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['auth/register']);
   }
 
-  ngOnInit(): void {}
-
-
-
+  // Control if the token is expired to show a message
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['sessionExpired']) {
+        this.sessionExpired = true;
+      }
+    });
+  }
 }

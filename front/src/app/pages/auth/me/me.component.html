@@ -5,6 +5,7 @@
   <input matInput formControlName="email" />
 
   <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+  <p *ngIf="saveSuccess" class="save-success-message">Vos modifications ont été enregistrées avec succès.</p>
   <button class="btnLogOut" id="logOut" (click)="logOut()">Se déconnecter</button>
 </form>
 

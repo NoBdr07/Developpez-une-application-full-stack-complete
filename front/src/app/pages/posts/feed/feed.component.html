@@ -6,7 +6,8 @@
   <div class="sort-container">
     <button mat-button (click)="toggleSortOrder()">
       Trier par
-      <mat-icon>arrow_downward</mat-icon>
+      <mat-icon *ngIf="!isSortedAsc" >arrow_downward</mat-icon>
+      <mat-icon *ngIf="isSortedAsc" >arrow_upward</mat-icon>
     </button>
   </div>
 </div>

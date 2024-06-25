@@ -10,22 +10,17 @@ import { Router } from '@angular/router';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss']
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent {
 
   public posts$: Observable<Post[]> = this.postsService.getPosts();
   sortOrder = 'asc';
+  isSortedAsc = true;
 
   constructor(
     private sessionService: SessionService,
     private postsService: PostsService,
     private router: Router
   ) { }
-
-  ngOnInit(): void {
-    this.posts$.subscribe(posts => {
-      console.log(posts);
-    });
-  }
 
   create() {
     this.router.navigate(['posts/create']);
@@ -40,12 +35,13 @@ export class FeedComponent implements OnInit {
     this.posts$ = this.posts$.pipe(
       map(posts => posts.sort((a, b) => {
         if (this.sortOrder === 'asc') {
+          this.isSortedAsc = true;
           return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
         } else {
+          this.isSortedAsc = false;
           return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         }
       }))
     );
   }
-
 }

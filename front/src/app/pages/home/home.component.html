@@ -3,5 +3,8 @@
   <div id="btnContainer">
     <button mat-raised-button (click)="login()">Se connecter</button>
     <button mat-raised-button (click)="register()">S'inscrire</button>
+    <div *ngIf="sessionExpired" class="warning">
+      Votre session a expiré. Veuillez vous reconnecter.
+    </div>
   </div>
 </div>

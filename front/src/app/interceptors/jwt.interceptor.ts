@@ -1,13 +1,14 @@
-import { HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
-//configures an interceptor that automatically adds a JWT token to the headers 
-// of outgoing HTTP requests if a token is present in the localStorage.
 @Injectable({ providedIn: 'root' })
 export class JwtInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private router: Router) {}
 
-  public intercept(request: HttpRequest<any>, next: HttpHandler) {
+  public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
     if (token) {
       request = request.clone({
@@ -16,6 +17,16 @@ export class JwtInterceptor implements HttpInterceptor {
         },
       });
     }
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 && error.error === 'Token expired') {
+          // Remove token from localStorage or any other storage
+          localStorage.removeItem('token');
+          // Redirect to home page with queryParams indicating session expiration
+          this.router.navigate(['/'], { queryParams: { sessionExpired: true } });
+        }
+        return throwError(error);
+      })
+    );
   }
 }

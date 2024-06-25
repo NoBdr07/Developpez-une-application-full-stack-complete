@@ -11,12 +11,12 @@
   </mat-form-field>
 
   <input matInput placeholder="Titre de l'article" formControlName="title" />
-  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['required'] && form.get('title')?.touched" >Le titre est requis.</p>
-  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['minlength'] && form.get('title')?.touched" >Le titre doit faire minimum 5 charactères.</p>
+  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['required'] && form.get('title')?.dirty" >Le titre est requis.</p>
+  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['minlength'] && form.get('title')?.dirty" >Le titre doit faire minimum 5 charactères.</p>
   
   <textarea matInput class="content" placeholder="Contenu de l'article" formControlName="content"> </textarea>
-  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['required'] && form.get('content')?.touched" >Le contenu est requis.</p>
-  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['minlength'] && form.get('content')?.touched" >Le contenu doit faire minimum 50 caractères.</p>
+  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['required'] && form.get('content')?.dirty" >Le contenu est requis.</p>
+  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['minlength'] && form.get('content')?.dirty" >Le contenu doit faire minimum 50 caractères.</p>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Créer</button>
 </form>

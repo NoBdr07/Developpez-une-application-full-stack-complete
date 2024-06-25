@@ -19,6 +19,8 @@ export class MeComponent implements OnInit {
 
   subscriptions$ = this.topicService.getSubscriptions();
 
+  public saveSuccess: boolean = false;
+
   public form = this.fb.group({
     username: [''],
     email: ['']
@@ -33,8 +35,10 @@ export class MeComponent implements OnInit {
 
   public submit(): void {
     const updateRequest = this.form.value as UpdateRequest;
-    this.authService.update(updateRequest).subscribe(
-    );  
+    this.authService.update(updateRequest).subscribe(() => {
+      this.saveSuccess = true;
+      setTimeout(() => this.saveSuccess = false, 3000);
+    });  
   }
 
   public logOut(): void {
