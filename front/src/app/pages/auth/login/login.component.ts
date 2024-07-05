@@ -12,7 +12,7 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent { 
   public onError = false;
 
   public form = this.fb.group({
