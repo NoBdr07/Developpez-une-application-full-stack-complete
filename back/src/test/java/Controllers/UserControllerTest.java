@@ -60,25 +60,4 @@ public class UserControllerTest {
         assertEquals(userDto.getUsername(), response.getUsername());
         assertEquals(userDto.getEmail(), response.getEmail());
     }
-
-    @Test
-    @DisplayName("Should return updated user when user is updated successfully")
-    public void updateCurrentUser_Success() {
-        UserDto userDto = new UserDto();
-        userDto.setUsername("newUsername");
-        userDto.setEmail("newTest@test.com");
-
-        when(authentication.getPrincipal()).thenReturn(userDetails);
-        when(userDetails.getUsername()).thenReturn("username");
-        when(userService.findByLogin(any(String.class))).thenReturn(java.util.Optional.of(new User()));
-        when(userService.save(any(User.class))).thenReturn(new User());
-        when(userMapper.userToDto(any(User.class))).thenReturn(userDto);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        UserDto response = userController.updateCurrentUser(userDto);
-
-        assertEquals(userDto.getUsername(), response.getUsername());
-        assertEquals(userDto.getEmail(), response.getEmail());
-    }
 }

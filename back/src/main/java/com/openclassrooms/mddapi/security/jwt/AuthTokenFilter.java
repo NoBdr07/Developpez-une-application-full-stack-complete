@@ -60,7 +60,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             response.getWriter().write("Token expired");
             return;
         } catch (Exception e) {
-            logger.error("Cannot set user authentication: {}", e);
+            logger.error("Cannot set user authentication", e);
         }
 
         filterChain.doFilter(request, response);
