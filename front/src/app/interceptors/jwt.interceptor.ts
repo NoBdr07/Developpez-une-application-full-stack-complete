@@ -4,10 +4,20 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+/**
+ * Interceptor to add JWT token to outgoing requests and handle token expiration errors.
+ */
 @Injectable({ providedIn: 'root' })
 export class JwtInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
+  /**
+   * Intercepts the outgoing HTTP request and adds the JWT token to the request headers.
+   * Also handles token expiration errors and redirects to the home page with session expiration indication.
+   * @param request - The outgoing HTTP request.
+   * @param next - The next HTTP handler in the interceptor chain.
+   * @returns An observable of the HTTP event.
+   */
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
     if (token) {

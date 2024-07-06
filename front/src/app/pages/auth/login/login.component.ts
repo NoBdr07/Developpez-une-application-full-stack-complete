@@ -7,29 +7,47 @@ import { AuthSuccess } from 'src/app/pages/auth/interfaces/authSucess.interface'
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
 
+/**
+ * Represents the LoginComponent class.
+ * This component is responsible for handling the login functionality.
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent { 
+  /**
+   * Represents whether an error occurred during login.
+   */
   public onError = false;
 
+  /**
+   * Represents the login form.
+   */
   public form = this.fb.group({
     login: [''],
     password: ['', [Validators.required, Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,}$')]]
   });
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
     private sessionService: SessionService
   ) { }
 
+  /**
+   * Navigates back to the previous page.
+   */
   back() {
     window.history.back();
   }
 
+  /**
+   * Submits the login form.
+   * Performs the login request and handles the response.
+   */
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
     this.authService.login(loginRequest).subscribe(
@@ -44,7 +62,5 @@ export class LoginComponent {
       },
       error => this.onError = true
     );
-  
   }
-
 }

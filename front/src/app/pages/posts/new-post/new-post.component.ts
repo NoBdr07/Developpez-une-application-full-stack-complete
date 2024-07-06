@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { PostsService } from 'src/app/pages/posts/services/posts.service';
 import { Post } from 'src/app/interfaces/post.interface';
-import { User } from 'src/app/interfaces/user.interface';
-import { Topic } from 'src/app/interfaces/topic.interface';
 import { Router } from '@angular/router';
-import { SessionService } from 'src/app/services/session.service';
 import { TopicService } from 'src/app/pages/topics/services/topic.service';
 
+/**
+ * Component for creating a new post.
+ */
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
@@ -16,8 +16,14 @@ import { TopicService } from 'src/app/pages/topics/services/topic.service';
 })
 export class NewPostComponent {
 
+  /**
+   * Observable that emits the list of topics.
+   */
   topics$ = this.topicService.getTopics();
 
+  /**
+   * Form group for the new post.
+   */
   public form = this.fb.group({
     topic: ['', Validators.required],
     title: ['', [Validators.required, Validators.minLength(5)]],
@@ -28,10 +34,12 @@ export class NewPostComponent {
     private postsService: PostsService,
     private fb: FormBuilder,
     private router: Router,
-    private sessionService: SessionService,
     private topicService: TopicService
   ) { }
 
+  /**
+   * Submits the new post form and creates a new post.
+   */
   public submit(): void {
     const post = this.form.value as unknown as Post;
     this.postsService.createPost(post).subscribe(
@@ -41,9 +49,10 @@ export class NewPostComponent {
     );
   }
 
+  /**
+   * Navigates back to the previous page.
+   */
   back() {
     window.history.back();
   }
-
-
 }
