@@ -1,6 +1,8 @@
 package com.openclassrooms.mddapi.serviceImpls;
 
 import com.openclassrooms.mddapi.models.entities.Subscription;
+import com.openclassrooms.mddapi.models.entities.Topic;
+import com.openclassrooms.mddapi.models.entities.User;
 import com.openclassrooms.mddapi.repositories.SubscriptionRepository;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +19,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
      * Get all subscriptions for a user
-     * @param userId The user id
+     * @param user The user id
      * @return A list of topic ids
      */
-    public List<Long> getSubscriptions(Long userId) {
-        List<Subscription> subscriptions = subscriptionRepository.findByUserId(userId);
-        List<Long> topicIds = new ArrayList<>();
+    public List<Topic> getSubscriptions(User user) {
+        List<Subscription> subscriptions = subscriptionRepository.findByUserId(user.getId());
+        List<Topic> topics = new ArrayList<>();
         for (Subscription subscription : subscriptions) {
-            topicIds.add(subscription.getTopicId());
+            topics.add(subscription.getTopic());
         }
-        return topicIds;
+        return topics;
     }
 }

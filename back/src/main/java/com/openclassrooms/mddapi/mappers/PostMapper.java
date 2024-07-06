@@ -33,8 +33,8 @@ public class PostMapper {
         postDto.setPostId(post.getPostId());
         postDto.setTitle(post.getTitle());
         postDto.setContent(post.getContent());
-        postDto.setUser(userService.getUserFromId(post.getUserId()).get());
-        postDto.setTopic(topicService.getTopicById(post.getTopicId()).get());
+        postDto.setUser(post.getUser());
+        postDto.setTopic(post.getTopic());
         postDto.setCreatedAt(post.getCreatedAt());
 
         return postDto;
@@ -70,7 +70,7 @@ public class PostMapper {
         Post post = new Post();
         post.setTitle(postDto.getTitle());
         post.setContent(postDto.getContent());
-        post.setTopicId(postDto.getTopic().getTopicId());
+        post.setTopic(postDto.getTopic());
 
         return post;
     }

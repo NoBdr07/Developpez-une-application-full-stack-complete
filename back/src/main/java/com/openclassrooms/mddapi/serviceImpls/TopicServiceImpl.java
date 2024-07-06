@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.serviceImpls;
 
 import com.openclassrooms.mddapi.models.entities.Subscription;
 import com.openclassrooms.mddapi.models.entities.Topic;
+import com.openclassrooms.mddapi.models.entities.User;
 import com.openclassrooms.mddapi.repositories.SubscriptionRepository;
 import com.openclassrooms.mddapi.repositories.TopicRepository;
 import com.openclassrooms.mddapi.services.TopicService;
@@ -49,24 +50,24 @@ public class TopicServiceImpl implements TopicService {
 
     /**
      * Subscribe to a topic
-     * @param topicId The ID of the topic
-     * @param userId The ID of the user
+     * @param topic The topic
+     * @param user The  user
      */
-    public void subscribe(Long topicId, Long userId) {
+    public void subscribe(Topic topic, User user) {
         Subscription sub = new Subscription();
-        sub.setTopicId(topicId);
-        sub.setUserId(userId);
+        sub.setTopic(topic);
+        sub.setUser(user);
         subscriptionRepository.save(sub);
     }
 
     /**
      * Unsubscribe from a topic
      * Is transactional to ensure data consistency if the delete fails
-     * @param topicId The ID of the topic
-     * @param userId The ID of the user
+     * @param topic The topic
+     * @param user The  user
      */
     @Transactional
-    public void unsubscribe(Long topicId, Long userId) {
-        subscriptionRepository.deleteByTopicIdAndUserId(topicId, userId);
+    public void unsubscribe(Topic topic, User user) {
+        subscriptionRepository.deleteByTopicAndUser(topic, user);
     }
 }

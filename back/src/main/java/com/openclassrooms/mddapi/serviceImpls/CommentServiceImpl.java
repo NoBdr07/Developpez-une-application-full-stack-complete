@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.serviceImpls;
 
 import com.openclassrooms.mddapi.models.entities.Comment;
+import com.openclassrooms.mddapi.models.entities.Post;
 import com.openclassrooms.mddapi.repositories.CommentRepository;
 import com.openclassrooms.mddapi.services.CommentService;
 import com.openclassrooms.mddapi.utils.DateUtils;
@@ -30,10 +31,11 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * Find comments by post id
-     * @param postId The id of the post
+     * @param post The post concerned
      * @return List<Comment>
      */
-    public List<Comment> findByPostId(Long postId) {
-        return commentRepository.findByPostId(postId);
+    public List<Comment> findByPost(Post post) {
+
+        return commentRepository.findByPost(post);
     }
 }

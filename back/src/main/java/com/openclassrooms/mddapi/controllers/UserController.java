@@ -58,7 +58,10 @@ public class UserController {
     }
 
     /**
-     * Update the current user
+     * Update the current user. It save the new user is database and then generate a new JWT token
+     * with the updated user information.
+     * It is necessary to make sure that the authentication process will work
+     * once the user has updated its information.
      * @param userDto the user to update
      * @return the updated user
      */
@@ -86,8 +89,6 @@ public class UserController {
 
         // Generate a new JWT
         String newJwt = jwtUtils.generateJwtToken(newAuth);
-        // print the new jwt
-        System.out.println(newJwt);
 
         // Return the new JWT in the response header
         HttpHeaders responseHeaders = new HttpHeaders();

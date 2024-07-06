@@ -12,13 +12,6 @@ import java.util.List;
 
 @Component
 public class CommentMapper {
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private PostService postService;
-
     /**
      * Maps a Comment entity to a CommentDto
      * @param comment the Comment entity to map
@@ -32,8 +25,8 @@ public class CommentMapper {
         CommentDto commentDto = new CommentDto();
         commentDto.setCommentId(comment.getCommentId());
         commentDto.setContent(comment.getContent());
-        commentDto.setUser(userService.getUserFromId(comment.getUserId()).get());
-        commentDto.setPost(postService.getPost(comment.getPostId()).get());
+        commentDto.setUser(comment.getUser());
+        commentDto.setPost(comment.getPost());
         commentDto.setCreatedAt(comment.getCreatedAt());
 
         return commentDto;
@@ -71,10 +64,10 @@ public class CommentMapper {
         comment.setCommentId(commentDto.getCommentId());
         comment.setContent(commentDto.getContent());
         if (commentDto.getUser() != null) {
-            comment.setUserId(commentDto.getUser().getId());
+            comment.setUser(commentDto.getUser());
         }
         if (commentDto.getPost() != null) {
-            comment.setPostId(commentDto.getPost().getPostId());
+            comment.setPost(commentDto.getPost());
         }
         comment.setCreatedAt(commentDto.getCreatedAt());
 

@@ -10,11 +10,13 @@ public class Subscription {
     @Column(name = "id")
     private Long subscriptionId;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "topic_id")
-    private Long topicId;
+    @ManyToOne
+    @JoinColumn(name = "topic_id", nullable = false)
+    private Topic topic;
 
     public Long getSubscriptionId() {
         return subscriptionId;
@@ -24,19 +26,19 @@ public class Subscription {
         this.subscriptionId = subscriptionId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
-    public Long getTopicId() {
-        return topicId;
+    public User getUser() {
+        return user;
     }
 
-    public void setTopicId(Long topicId) {
-        this.topicId = topicId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

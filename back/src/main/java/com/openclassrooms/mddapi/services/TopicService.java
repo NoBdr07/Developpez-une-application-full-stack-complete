@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.models.entities.Topic;
+import com.openclassrooms.mddapi.models.entities.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +14,9 @@ public interface TopicService {
 
     List<Topic> getTopicsByIds(List<Long> topicIds);
 
-    void subscribe(Long topicId, Long userId);
+    void subscribe(Topic topic, User user);
 
-    void unsubscribe(Long topicId, Long userId);
+    void unsubscribe(Topic topic, User user);
 
 
 }

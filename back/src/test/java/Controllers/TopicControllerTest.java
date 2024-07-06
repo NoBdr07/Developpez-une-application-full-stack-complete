@@ -4,27 +4,26 @@ import com.openclassrooms.mddapi.controllers.TopicController;
 import com.openclassrooms.mddapi.mappers.TopicMapper;
 import com.openclassrooms.mddapi.models.dtos.TopicDto;
 import com.openclassrooms.mddapi.models.entities.Topic;
+import com.openclassrooms.mddapi.models.entities.User;
 import com.openclassrooms.mddapi.security.services.CustomUserDetailsService;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import com.openclassrooms.mddapi.services.TopicService;
+import com.openclassrooms.mddapi.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-public class TopicControllerTest {
-
-    @InjectMocks
-    private TopicController topicController;
+class TopicControllerTest {
 
     @Mock
     private TopicService topicService;
@@ -38,56 +37,82 @@ public class TopicControllerTest {
     @Mock
     private CustomUserDetailsService userDetailsService;
 
+    @Mock
+    private UserService userService;
+
+    @InjectMocks
+    private TopicController topicController;
+
+    private User testUser;
+    private Topic testTopic;
+    private TopicDto testTopicDto;
+
     @BeforeEach
-    public void setup() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
+
+        testUser = new User();
+        testUser.setId(1L);
+        testUser.setEmail("testuser@example.com");
+        testUser.setPassword("password");
+        testUser.setUsername("testuser");
+
+        testTopic = new Topic();
+        testTopic.setTopicId(1L);
+        testTopic.setName("Test Topic");
+        testTopic.setDescription("Test Description");
+
+        testTopicDto = new TopicDto();
+        testTopicDto.setName("Test Topic");
+        testTopicDto.setDescription("Test Description");
     }
 
     @Test
-    @DisplayName("Should return list of topics when topics are fetched")
-    public void getTopics_Success() {
-        TopicDto topicDto = new TopicDto();
-        topicDto.setName("Test topic");
+    void getTopics_ShouldReturnListOfTopicDtos() {
+        when(topicService.getTopics()).thenReturn(Arrays.asList(testTopic));
+        when(topicMapper.topicListToDto(any(List.class))).thenReturn(Arrays.asList(testTopicDto));
 
-        when(topicService.getTopics()).thenReturn(Collections.singletonList(new Topic()));
-        when(topicMapper.topicListToDto(any(List.class))).thenReturn(Collections.singletonList(topicDto));
+        List<TopicDto> result = topicController.getTopics();
 
-        List<TopicDto> response = topicController.getTopics();
-
-        assertEquals(1, response.size());
-        assertEquals(topicDto.getName(), response.get(0).getName());
+        assertEquals(1, result.size());
+        assertEquals("Test Topic", result.get(0).getName());
+        verify(topicService, times(1)).getTopics();
     }
 
     @Test
-    @DisplayName("Should return list of subscribed topics when subscriptions are fetched")
-    public void getSubscriptions_Success() {
-        TopicDto topicDto = new TopicDto();
-        topicDto.setName("Test topic");
-
+    void getSubscriptions_ShouldReturnListOfTopicDtos() {
         when(userDetailsService.getCurrentUserId()).thenReturn(1L);
-        when(subscriptionService.getSubscriptions(any(Long.class))).thenReturn(Collections.singletonList(1L));
-        when(topicService.getTopicsByIds(any(List.class))).thenReturn(Collections.singletonList(new Topic()));
-        when(topicMapper.topicListToDto(any(List.class))).thenReturn(Collections.singletonList(topicDto));
+        when(userService.getUserFromId(1L)).thenReturn(Optional.of(testUser));
+        when(subscriptionService.getSubscriptions(any(User.class))).thenReturn(Arrays.asList(testTopic));
+        when(topicMapper.topicListToDto(any(List.class))).thenReturn(Arrays.asList(testTopicDto));
 
-        List<TopicDto> response = topicController.getSubscriptions();
+        List<TopicDto> result = topicController.getSubscriptions();
 
-        assertEquals(1, response.size());
-        assertEquals(topicDto.getName(), response.get(0).getName());
+        assertEquals(1, result.size());
+        assertEquals("Test Topic", result.get(0).getName());
+        verify(subscriptionService, times(1)).getSubscriptions(any(User.class));
     }
 
     @Test
-    @DisplayName("Should subscribe to a topic successfully")
-    public void subscribe_Success() {
+    void subscribe_ShouldInvokeSubscribeMethod() {
         when(userDetailsService.getCurrentUserId()).thenReturn(1L);
+        when(userService.getUserFromId(1L)).thenReturn(Optional.of(testUser));
+        when(topicService.getTopicById(1L)).thenReturn(Optional.of(testTopic));
 
         topicController.subscribe(1L);
+
+        verify(topicService, times(1)).subscribe(any(Topic.class), any(User.class));
     }
 
     @Test
-    @DisplayName("Should unsubscribe from a topic successfully")
-    public void unsubscribe_Success() {
+    void unsubscribe_ShouldInvokeUnsubscribeMethod() {
         when(userDetailsService.getCurrentUserId()).thenReturn(1L);
+        when(userService.getUserFromId(1L)).thenReturn(Optional.of(testUser));
+        when(topicService.getTopicById(1L)).thenReturn(Optional.of(testTopic));
 
         topicController.unsubscribe(1L);
+
+        verify(topicService, times(1)).unsubscribe(any(Topic.class), any(User.class));
     }
 }
+

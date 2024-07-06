@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.serviceImpls;
 
 import com.openclassrooms.mddapi.models.entities.Post;
+import com.openclassrooms.mddapi.models.entities.Topic;
 import com.openclassrooms.mddapi.repositories.PostRepository;
 import com.openclassrooms.mddapi.services.PostService;
 import com.openclassrooms.mddapi.utils.DateUtils;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -31,11 +33,11 @@ public class PostServiceImpl implements PostService {
 
     /**
      * Get all posts that belong to the topics the user has subscribed to
-     * @param topicIds A list of topic IDs
+     * @param topics A list of topics
      * @return A list of Post objects
      */
-    public List<Post> getPostsByTopicIds(List<Long> topicIds) {
-        return postRepository.findByTopicIdIn(topicIds);
+    public List<Post> getPostsByTopics(List<Topic> topics) {
+        return postRepository.findByTopicIn(topics);
     }
 
     /**

@@ -2,10 +2,12 @@ package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.mappers.TopicMapper;
 import com.openclassrooms.mddapi.models.dtos.TopicDto;
+import com.openclassrooms.mddapi.models.entities.Topic;
 import com.openclassrooms.mddapi.models.entities.User;
 import com.openclassrooms.mddapi.security.services.CustomUserDetailsService;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import com.openclassrooms.mddapi.services.TopicService;
+import com.openclassrooms.mddapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.CachingUserDetailsService;
 import org.springframework.security.core.Authentication;
@@ -30,6 +32,9 @@ public class TopicController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * Get all topics
      * @return List<TopicDto>
@@ -46,8 +51,9 @@ public class TopicController {
     @GetMapping("/subscriptions")
     public List<TopicDto> getSubscriptions() {
         Long userId = userDetailsService.getCurrentUserId();
-        List<Long> topicsId = subscriptionService.getSubscriptions(userId);
-        return topicMapper.topicListToDto(topicService.getTopicsByIds(topicsId));
+        User user = userService.getUserFromId(userId).get();
+        List<Topic> topics = subscriptionService.getSubscriptions(user);
+        return topicMapper.topicListToDto(topics);
     }
 
     /**
@@ -57,8 +63,11 @@ public class TopicController {
     @PostMapping("/{topicId}/subscribe")
     public void subscribe(@PathVariable("topicId") Long topicId) {
         Long userId = userDetailsService.getCurrentUserId();
+        User user = userService.getUserFromId(userId).get();
 
-        topicService.subscribe(topicId, userId);
+        Topic topic = topicService.getTopicById(topicId).get();
+
+        topicService.subscribe(topic, user);
     }
 
     /**
@@ -68,7 +77,10 @@ public class TopicController {
     @DeleteMapping("/{topicId}/subscribe")
     public void unsubscribe(@PathVariable("topicId") Long topicId) {
         Long userId = userDetailsService.getCurrentUserId();
+        User user = userService.getUserFromId(userId).get();
 
-        topicService.unsubscribe(topicId, userId);
+        Topic topic = topicService.getTopicById(topicId).get();
+
+        topicService.unsubscribe(topic, user);
     }
 }
