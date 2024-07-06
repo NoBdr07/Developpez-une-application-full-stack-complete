@@ -4,11 +4,11 @@
 
   <div class="labelInput">
     <label for="login">Email ou nom d'utilisateur</label>
-    <input matInput formControlName="login" />
+    <input matInput formControlName="login" name="login"/>
   </div>
   <div class="labelInput">
     <label for="password">Mot de passe</label>
-    <input matInput type="password" formControlName="password"/>
+    <input matInput type="password" formControlName="password" name="password"/>
   </div>
 
   <p class="errorMessage" *ngIf="onError">Login ou mot de passe incorrect</p>

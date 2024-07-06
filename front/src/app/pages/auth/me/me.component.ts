@@ -65,8 +65,6 @@ export class MeComponent implements OnInit {
       (topics) => {
         console.log(topics);
       }
-    );
-    
+    );    
   }
-
 }

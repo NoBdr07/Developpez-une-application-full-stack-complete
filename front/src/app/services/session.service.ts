@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthService } from '../pages/auth/services/auth.service';
 import { User } from '../interfaces/user.interface';
 
 @Injectable({
@@ -44,5 +43,4 @@ import { User } from '../interfaces/user.interface';
       this.isLogged = !!token;
       this.next();
   }
-
   }

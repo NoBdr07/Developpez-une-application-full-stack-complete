@@ -17,7 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
         },
       });
     }
-
+    
     return next.handle(request).pipe(
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
@@ -34,7 +34,7 @@ export class JwtInterceptor implements HttpInterceptor {
           // Redirect to home page with queryParams indicating session expiration
           this.router.navigate(['/'], { queryParams: { sessionExpired: true } });
         }
-        return throwError(error);
+        return throwError(() => new Error(error.message));
       })
     );
   }
