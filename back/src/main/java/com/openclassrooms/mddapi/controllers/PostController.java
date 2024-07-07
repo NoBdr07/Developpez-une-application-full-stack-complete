@@ -36,7 +36,7 @@ public class PostController {
 
     /**
      * Create a new post
-     * @param postDto
+     * @param postDto The postDto that contains the post content, the title and the topic.
      */
     @PostMapping
     public void createPost(@Valid @RequestBody PostDto postDto) {
@@ -51,7 +51,8 @@ public class PostController {
     }
 
     /**
-     * Get all posts
+     * Get all posts to create the feed of the user
+     * We first get the user, then its subscriptions and finally the posts of the topics
      * @return List<PostDto>
      */
     @GetMapping
@@ -67,7 +68,11 @@ public class PostController {
         return postMapper.postListToDto(postService.getPostsByTopics(topics));
     }
 
-    // Get a specific post
+    /**
+     * Get a post by its id
+     * @param postId The id of the post
+     * @return PostDto
+     */
     @GetMapping("/{postId}")
     public PostDto getPost(@PathVariable("postId") Long postId) {
         return postMapper.postToDto(postService.getPost(postId).get());

@@ -1,13 +1,10 @@
 package com.openclassrooms.mddapi.security.jwt;
 
 import com.openclassrooms.mddapi.exceptions.JwtTokenExpiredException;
-import com.openclassrooms.mddapi.models.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
@@ -26,8 +23,8 @@ public class JwtUtils {
 
     /**
      * Generate token
-     * @param authentication
-     * @return
+     * @param authentication Current authentication
+     * @return A string token
      */
     public String generateJwtToken(Authentication authentication) {
 
@@ -44,8 +41,8 @@ public class JwtUtils {
 
     /**
      * Get login from token, it can be email or login
-     * @param token
-     * @return
+     * @param token Token
+     * @return A string login
      */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
@@ -53,8 +50,8 @@ public class JwtUtils {
 
     /**
      * Validate token
-     * @param authToken
-     * @return
+     * @param authToken Token
+     * @return A boolean that indicates if the token is valid
      */
     public boolean validateJwtToken(String authToken) {
         try {

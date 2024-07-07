@@ -2,9 +2,6 @@ package com.openclassrooms.mddapi.mappers;
 
 import com.openclassrooms.mddapi.models.dtos.PostDto;
 import com.openclassrooms.mddapi.models.entities.Post;
-import com.openclassrooms.mddapi.services.TopicService;
-import com.openclassrooms.mddapi.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,12 +9,6 @@ import java.util.List;
 
 @Component
 public class PostMapper {
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private TopicService topicService;
 
     /**
      * Maps a Post entity to a PostDto
@@ -73,22 +64,5 @@ public class PostMapper {
         post.setTopic(postDto.getTopic());
 
         return post;
-    }
-
-    /** Maps a list of PostDtos to a list of Post entities
-     * @param postDtos The list of PostDtos to map
-     * @return The list of Post entities
-     */
-    public List<Post> dtoListToPost(List<PostDto> postDtos) {
-        List<Post> posts = new ArrayList<>();
-
-        for (PostDto postDto : postDtos) {
-            Post post = dtoToPost(postDto);
-
-            if (post != null) {
-                posts.add(post);
-            }
-        }
-        return posts;
     }
 }

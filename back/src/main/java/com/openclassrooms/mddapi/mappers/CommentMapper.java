@@ -2,9 +2,6 @@ package com.openclassrooms.mddapi.mappers;
 
 import com.openclassrooms.mddapi.models.dtos.CommentDto;
 import com.openclassrooms.mddapi.models.entities.Comment;
-import com.openclassrooms.mddapi.services.PostService;
-import com.openclassrooms.mddapi.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -72,23 +69,5 @@ public class CommentMapper {
         comment.setCreatedAt(commentDto.getCreatedAt());
 
         return comment;
-    }
-
-    /**
-     * Maps a list of CommentDtos to a list of Comment entities
-     * @param commentDtos the list of CommentDtos to map
-     * @return the list of Comment entities
-     */
-    public List<Comment> dtoListToComment(List<CommentDto> commentDtos) {
-        List<Comment> comments = new ArrayList<>();
-
-        for (CommentDto commentDto : commentDtos) {
-            Comment comment = dtoToComment(commentDto);
-
-            if (comment != null) {
-                comments.add(comment);
-            }
-        }
-        return comments;
     }
 }

@@ -34,9 +34,9 @@ public class CommentController {
 
     /**
      * Create a new comment
-     * @param postId
-     * @param commentDto
-     * @return CommentDto
+     * @param postId The id of the post to comment
+     * @param commentDto The commentDto that contains the comment content
+     * @return CommentDto With the date, the user, the date and the comment content
      */
     @PostMapping("/posts/{postId}/comments")
     public CommentDto createComment(@PathVariable("postId") Long postId, @RequestBody CommentDto commentDto) {
@@ -48,7 +48,7 @@ public class CommentController {
 
     /**
      * Get all comments for a post
-     * @param postId
+     * @param postId The id of the post
      * @return List<CommentDto>
      */
     @GetMapping("/posts/{postId}/comments")

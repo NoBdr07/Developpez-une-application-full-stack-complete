@@ -55,7 +55,7 @@ public class UserControllerTest {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        UserDto response = userController.getCurentUser();
+        UserDto response = userController.getCurrentUser();
 
         assertEquals(userDto.getUsername(), response.getUsername());
         assertEquals(userDto.getEmail(), response.getEmail());

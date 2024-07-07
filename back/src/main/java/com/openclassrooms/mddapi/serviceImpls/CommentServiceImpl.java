@@ -35,7 +35,6 @@ public class CommentServiceImpl implements CommentService {
      * @return List<Comment>
      */
     public List<Comment> findByPost(Post post) {
-
         return commentRepository.findByPost(post);
     }
 }

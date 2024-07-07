@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.openclassrooms.mddapi.models.entities.Topic;
 import com.openclassrooms.mddapi.models.entities.User;
 import org.springframework.lang.NonNull;

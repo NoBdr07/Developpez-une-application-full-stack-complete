@@ -6,7 +6,7 @@ This API provide back-end for a blogging platform that allows users to create ac
 
 ### Technologies
 
-This API was developped on IntelliJ, with Java 11 and Spring Boot.  
+This API was developed on IntelliJ, with Java 11 and Spring Boot.  
 Security is managed by Spring Security and JWT.  
 Data is managed with Spring Data JPA and MySQL.
 
@@ -92,7 +92,7 @@ Then you can add data directly in MySQL command or use Postman :
 3. Make sure you are using a JDK 11 or more recent.
 4. Make sure you have maven installed.
 5. Use `mvn clean install`
-6. Setup your database info in application.properties
+6. Set up your database info in application.properties
 7. Launch the API using `mvn spring-boot:run`
 8. Then you can try to launch request on Postman or run the front-end projet by following the README in the "Front " directory.
 

@@ -9,10 +9,6 @@ import com.openclassrooms.mddapi.services.SubscriptionService;
 import com.openclassrooms.mddapi.services.TopicService;
 import com.openclassrooms.mddapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.CachingUserDetailsService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,20 +47,18 @@ public class TopicController {
     @GetMapping("/subscriptions")
     public List<TopicDto> getSubscriptions() {
         Long userId = userDetailsService.getCurrentUserId();
-        User user = userService.getUserFromId(userId).get();
-        List<Topic> topics = subscriptionService.getSubscriptions(user);
+        List<Topic> topics = subscriptionService.getSubscriptions(userService.getUserFromId(userId).get());
         return topicMapper.topicListToDto(topics);
     }
 
     /**
      * Create a new topic
-     * @param topicId
+     * @param topicId The id of the topic
      */
     @PostMapping("/{topicId}/subscribe")
     public void subscribe(@PathVariable("topicId") Long topicId) {
         Long userId = userDetailsService.getCurrentUserId();
         User user = userService.getUserFromId(userId).get();
-
         Topic topic = topicService.getTopicById(topicId).get();
 
         topicService.subscribe(topic, user);
@@ -72,13 +66,12 @@ public class TopicController {
 
     /**
      * Delete a topic
-     * @param topicId
+     * @param topicId The id of the topic
      */
     @DeleteMapping("/{topicId}/subscribe")
     public void unsubscribe(@PathVariable("topicId") Long topicId) {
         Long userId = userDetailsService.getCurrentUserId();
         User user = userService.getUserFromId(userId).get();
-
         Topic topic = topicService.getTopicById(topicId).get();
 
         topicService.unsubscribe(topic, user);

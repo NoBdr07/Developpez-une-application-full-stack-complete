@@ -20,9 +20,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     /**
      * Method to load user by login, it can be email or username
-     * @param login
+     * @param login User login (email or username)
      * @return UserDetails
-     * @throws UsernameNotFoundException
+     * @throws UsernameNotFoundException if user not found
      */
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

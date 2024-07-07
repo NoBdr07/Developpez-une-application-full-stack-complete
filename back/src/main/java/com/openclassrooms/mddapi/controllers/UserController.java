@@ -16,9 +16,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import com.openclassrooms.mddapi.models.payload.JwtResponse;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -37,22 +37,22 @@ public class UserController {
     private CustomUserDetailsService customUserDetailsService;
 
     /**
-     * Get the current user
-     * @return the current user
+     * Get the current user from the SecurityContext and return it as a UserDto.
+     * @return the current user dto
      */
     @GetMapping("/me")
-    public UserDto getCurentUser() {
+    public UserDto getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String username = userDetails.getUsername();
 
-            User user = userService.findByLogin(username).get();
+            Optional<User> userOpt = userService.findByLogin(username);
+            User user = userOpt.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
             return userMapper.userToDto(user);
         } else {
-            // Handle the case where the Principal is not an instance of UserDetails
             throw new RuntimeException("Principal is not an instance of UserDetails");
         }
     }

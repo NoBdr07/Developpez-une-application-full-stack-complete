@@ -68,8 +68,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     /**
      * Get token from the request
-     * @param request
-     * @return
+     * @param request request
+     * @return token
      */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");

@@ -43,38 +43,4 @@ public class TopicMapper {
         }
         return topicDtos;
     }
-
-    /** Maps a TopicDto to a Topic entity
-     * @param topicDto The TopicDto to map
-     * @return The Topic entity
-     */
-    public Topic dtoToTopic(TopicDto topicDto) {
-        if (topicDto == null) {
-            return null;
-        }
-
-        Topic topic = new Topic();
-        topic.setTopicId(topicDto.getTopicId());
-        topic.setName(topicDto.getName());
-        topic.setDescription(topicDto.getDescription());
-
-        return topic;
-    }
-
-    /** Maps a list of TopicDtos to a list of Topic entities
-     * @param topicDtos The list of TopicDtos to map
-     * @return The list of Topic entities
-     */
-    public List<Topic> dtoListToTopic(List<TopicDto> topicDtos) {
-        List<Topic> topics = new ArrayList<>();
-
-        for (TopicDto topicDto : topicDtos) {
-            Topic topic = dtoToTopic(topicDto);
-
-            if (topic != null) {
-                topics.add(topic);
-            }
-        }
-        return topics;
-    }
 }
