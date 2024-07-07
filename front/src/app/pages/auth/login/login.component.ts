@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/pages/auth/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginRequest } from 'src/app/pages/auth/interfaces/loginRequest.interface';
 import { AuthSuccess } from 'src/app/pages/auth/interfaces/authSucess.interface';

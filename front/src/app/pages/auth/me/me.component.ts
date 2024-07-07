@@ -3,11 +3,11 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/pages/auth/services/auth.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
-import { TopicService } from '../../topics/services/topic.service';
+import { TopicService } from '../../../services/topic.service';
 import { UpdateRequest } from '../interfaces/updateRequest.interface';
 
 @Component({

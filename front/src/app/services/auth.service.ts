@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest } from '../interfaces/loginRequest.interface';
+import { LoginRequest } from '../pages/auth/interfaces/loginRequest.interface';
 import { Observable, tap } from 'rxjs';
-import { AuthSuccess } from '../interfaces/authSucess.interface';
+import { AuthSuccess } from '../pages/auth/interfaces/authSucess.interface';
 import { User } from 'src/app/interfaces/user.interface';
-import { RegisterRequest } from '../interfaces/registerRequest.interface';
-import { UpdateRequest } from '../interfaces/updateRequest.interface';
+import { RegisterRequest } from '../pages/auth/interfaces/registerRequest.interface';
+import { UpdateRequest } from '../pages/auth/interfaces/updateRequest.interface';
 
 @Injectable({
   providedIn: 'root',

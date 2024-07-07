@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-import { PostsService } from 'src/app/pages/posts/services/posts.service';
+import { PostsService } from 'src/app/services/posts.service';
 import { Post } from 'src/app/interfaces/post.interface';
 import { Router } from '@angular/router';
-import { TopicService } from 'src/app/pages/topics/services/topic.service';
+import { TopicService } from 'src/app/services/topic.service';
 
 /**
  * Component for creating a new post.

@@ -3,7 +3,6 @@ button {
     width : fit-content;
 }
 
-/* Style par défaut pour les mobiles : 1 colonne */
 mat-card {
     background-color: #f5f5f5b4; 
     margin-bottom: 20px; 
@@ -41,7 +40,7 @@ mat-card {
     align-self: flex-start;
   }
   
-  /* Media Query pour les écrans d'ordinateur */
+  /* Media Query for computer screen */
   @media (min-width: 768px) {
     .card-container{
         display : grid;

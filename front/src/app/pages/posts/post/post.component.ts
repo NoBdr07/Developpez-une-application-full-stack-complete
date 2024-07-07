@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../services/posts.service';
-import { CommentsService } from '../services/comments.service';
+import { PostsService } from '../../../services/posts.service';
+import { CommentsService } from '../../../services/comments.service';
 import { FormControl } from '@angular/forms';
 import { SessionService } from 'src/app/services/session.service';
 

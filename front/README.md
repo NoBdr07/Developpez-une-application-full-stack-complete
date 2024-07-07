@@ -43,7 +43,7 @@ Definition :
     ├───app  
     │   │
     │   ├───interceptors  
-    │   │       jwt.interceptor.ts  //add token in the header of requests
+    │   │       jwt.interceptor.ts  //add token in the header of requests and check token's expiration
     │   │
     │   ├───interfaces  
     │   │       comment.interface.ts  
@@ -51,20 +51,17 @@ Definition :
     │   │       topic.interface.ts  
     │   │       user.interface.ts  
     │   │
+    │   ├───layout  // enable to add header in SPA  
+    │   │
     │   ├───pages  
     │   │   ├───auth  
     │   │   │   ├───interfaces  //requests interfaces 
-    │   │   │   │
-    │   │   │   ├───layout  //enable to add a header 
     │   │   │   │
     │   │   │   ├───login   
     │   │   │   │
     │   │   │   ├───me  //account page
     │   │   │   │
-    │   │   │   ├───register  
-    │   │   │   │
-    │   │   │   └───services  
-    │   │   │           auth.service.ts  
+    │   │   │   └───register  
     │   │   │
     │   │   ├───header  
     │   │   │
@@ -76,23 +73,20 @@ Definition :
     │   │   │   │
     │   │   │   ├───new-post  
     │   │   │   │
-    │   │   │   ├───post  
-    │   │   │   │
-    │   │   │   └───services      
-    │   │   │           comments.service.ts      
-    │   │   │           posts.service.ts   
+    │   │   │   └───post  
     │   │   │
     │   │   └───topics    
-    │   │       ├───list    
-    │   │       │
-    │   │       └───services  
-    │   │               topic.service.ts  
+    │   │       └───list    
     │   │
     │   ├───security  
     │   │       auth.guard.ts  //control path access 
     │   │
     │   └───services  
-    │           session.service.ts  //control the user state
+    │           auth.service.ts  
+    │           comment.service.ts  
+    │           posts.service.ts  
+    │           session.service.ts  //control the user session
+    │           topic.service.ts   
     │
     ├───assets  //contain some images and icons
     │

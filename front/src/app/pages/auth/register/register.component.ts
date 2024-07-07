@@ -2,11 +2,10 @@
  * Represents the RegisterComponent class.
  * This component is responsible for handling user registration.
  */
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SessionService } from 'src/app/services/session.service';
 import { RegisterRequest } from '../interfaces/registerRequest.interface';
 
 @Component({
@@ -24,7 +23,6 @@ export class RegisterComponent {
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
-    private sessionService: SessionService
   ) {}
 
   /**

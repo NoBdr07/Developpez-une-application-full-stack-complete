@@ -1,9 +1,8 @@
 /**
  * Represents the FeedComponent class that handles the feed functionality.
  */
-import { Component, OnInit } from '@angular/core';
-import { SessionService } from 'src/app/services/session.service';
-import { PostsService } from '../services/posts.service';
+import { Component } from '@angular/core';
+import { PostsService } from '../../../services/posts.service';
 import { Observable, map } from 'rxjs';
 import { Post } from 'src/app/interfaces/post.interface';
 import { Router } from '@angular/router';
@@ -31,7 +30,6 @@ export class FeedComponent {
   isSortedAsc = true;
 
   constructor(
-    private sessionService: SessionService,
     private postsService: PostsService,
     private router: Router
   ) { }

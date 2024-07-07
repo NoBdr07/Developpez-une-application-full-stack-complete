@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import { LayoutComponent } from './pages/auth/layout/layout.component';
+import { LayoutComponent } from './layout/layout.component';
 import { FeedComponent } from './pages/posts/feed/feed.component';
 import { NewPostComponent } from './pages/posts/new-post/new-post.component';
 import { MeComponent } from './pages/auth/me/me.component';

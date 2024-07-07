@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 
-/**
- * Service responsible for managing user session.
- */
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service responsible for managing user sessions.
+ */
 export class SessionService {
 
   constructor() {
@@ -24,6 +24,9 @@ export class SessionService {
    */
   public user: User | undefined;
 
+  /**
+   * Subject that emits the current login status.
+   */
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
   /**
