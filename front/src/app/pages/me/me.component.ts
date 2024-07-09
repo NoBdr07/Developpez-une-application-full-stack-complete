@@ -7,8 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
-import { TopicService } from '../../../services/topic.service';
-import { UpdateRequest } from '../interfaces/updateRequest.interface';
+import { TopicService } from '../../services/topic.service';
+import { UpdateRequest } from '../auth/interfaces/updateRequest.interface';
 
 @Component({
   selector: 'app-me',
