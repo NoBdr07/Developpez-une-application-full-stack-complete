@@ -66,6 +66,6 @@ export class HeaderComponent implements OnInit {
    * @returns A boolean indicating whether the current page is the authenticated user's profile page.
    */
   isAuthMePage(): boolean {
-    return this.router.url === '/auth/me';
+    return this.router.url === '/me';
   }
 }

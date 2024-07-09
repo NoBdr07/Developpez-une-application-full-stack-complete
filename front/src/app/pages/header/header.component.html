@@ -8,8 +8,8 @@
   <div id="menu" *ngIf="isLogged && isDesktop">
     <a routerLink="/posts/feed" routerLinkActive="active">Articles</a>
     <a routerLink="/topics" routerLinkActive="active">Thèmes</a>
-    <img *ngIf="!isAuthMePage()" id="user" src="/assets/user.png" routerLink="/auth/me" />
-    <img *ngIf="isAuthMePage()" id="user" src="/assets/user-violet.png" routerLink="/auth/me" />
+    <img *ngIf="!isAuthMePage()" id="user" src="/assets/user.png" routerLink="/me" />
+    <img *ngIf="isAuthMePage()" id="user" src="/assets/user-violet.png" routerLink="/me" />
   </div>
 
   <!-- Side bar for small screens -->
@@ -19,7 +19,7 @@
       <button mat-button (click)="toggleMenu()">Fermer</button>
       <a routerLink="/posts/feed" routerLinkActive="active">Articles</a>
       <a routerLink="/topics" routerLinkActive="active">Thèmes</a>
-      <img src="/assets/user.png" routerLink="/auth/me" />
+      <img src="/assets/user.png" routerLink="/me" />
     </div>
   </div>
 </div>
