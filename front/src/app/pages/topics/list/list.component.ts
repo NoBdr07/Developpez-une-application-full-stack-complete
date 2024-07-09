@@ -33,6 +33,7 @@ export class ListComponent implements OnInit {
 
   /**
    * Merges the topics and subscriptions observables to create an observable of topics with subscription information.
+   * The isSubscribed property alow the template to disable the button if the user is already subscribed to the topic.
    */
   mergeTopicsAndSubscriptions(): void {
     this.topicsSubs$ = combineLatest([this.topics$, this.subscriptions$]).pipe(

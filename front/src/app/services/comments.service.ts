@@ -33,7 +33,6 @@ export class CommentsService {
   public createComment(postId: string, content: string): Observable<Comment> {
     let comment: Comment = { content: content } as Comment;
     const url = this.pathService.replace(':postId', postId);
-    console.log(comment);
     return this.http.post<Comment>(url, comment);
   }
 }

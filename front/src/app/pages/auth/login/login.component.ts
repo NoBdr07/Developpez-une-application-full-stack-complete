@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { LoginRequest } from 'src/app/pages/auth/interfaces/loginRequest.interface';
 import { AuthSuccess } from 'src/app/pages/auth/interfaces/authSucess.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -27,7 +27,7 @@ export class LoginComponent {
    */
   public form = this.fb.group({
     login: [''],
-    password: ['', [Validators.required, Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,}$')]]
+    password: [''],
   });
 
   constructor(
@@ -53,7 +53,6 @@ export class LoginComponent {
     this.authService.login(loginRequest).subscribe(
       (response: AuthSuccess) => {
         localStorage.setItem('token', response.token);
-        console.log(localStorage.getItem);
         this.authService.me().subscribe((user: User) => {
           this.sessionService.logIn(user);
           this.router.navigate(['/posts/feed'])

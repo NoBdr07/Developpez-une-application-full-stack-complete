@@ -66,7 +66,6 @@ export class MeComponent implements OnInit {
    * @param topicId - The ID of the topic to unsubscribe from.
    */
   public unsubscribe(topicId: number): void {
-    console.log(topicId);
     this.topicService.unsubscribe(topicId).subscribe(
       () => this.subscriptions$ = this.topicService.getSubscriptions()
     );

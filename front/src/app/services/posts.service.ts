@@ -37,7 +37,6 @@ export class PostsService {
    * @returns An observable of the created post.
    */
   public createPost(post: Post): Observable<Post> {
-    console.log(post);
     return this.http.post<Post>(`${this.pathService}`, post);
   }
 }

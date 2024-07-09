@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { PostsService } from '../../../services/posts.service';
 import { CommentsService } from '../../../services/comments.service';
 import { FormControl } from '@angular/forms';
-import { SessionService } from 'src/app/services/session.service';
 
 /**
  * Represents the PostComponent which displays a single post and its comments.
@@ -69,6 +68,5 @@ export class PostComponent {
   constructor(
     private postService: PostsService,
     private commentsService: CommentsService,
-    private sessionService: SessionService,
   ) {}
 }

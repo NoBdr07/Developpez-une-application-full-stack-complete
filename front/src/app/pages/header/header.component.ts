@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
    */
   constructor(private sessionService: SessionService, private router: Router) {
     this.checkScreenSize.bind(this);
-    console.log(this.isDesktop);
   }
 
   /**
