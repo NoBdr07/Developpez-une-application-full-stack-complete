@@ -72,6 +72,9 @@ export class PostComponent implements OnDestroy{
     window.history.back();
   }
 
+  /**
+   * Unsubscribe to observable when the component is destroyed.
+   */
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
