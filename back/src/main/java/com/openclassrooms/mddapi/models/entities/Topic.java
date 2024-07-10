@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.models.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "Topics")
@@ -17,7 +16,6 @@ public class Topic {
 
     @Column(name = "description")
     private String description;
-
 
     public String getDescription() {
         return description;

@@ -43,7 +43,12 @@ public class AuthController {
         if (userService.existsByEmail(registerRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already taken!"));
+                    .body(new MessageResponse("Erreur : email déjà pris !"));
+        }
+        if(userService.existsByUsername(registerRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Erreur : nom d'utilisateur déjà pris !"));
         }
         userService.create(
                 registerRequest.getEmail(),

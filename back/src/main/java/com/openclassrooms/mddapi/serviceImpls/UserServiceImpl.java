@@ -63,6 +63,15 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * Check if user exists by username
+     * @param username User username
+     *                 @return boolean
+     */
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    /**
      * Check if user exists by login
      * @param login User login, it can be email or username
      * @return User
