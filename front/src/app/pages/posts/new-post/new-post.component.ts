@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { PostsService } from 'src/app/services/posts.service';
 import { Post } from 'src/app/interfaces/post.interface';
 import { Router } from '@angular/router';
 import { TopicService } from 'src/app/services/topic.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Component for creating a new post.
@@ -14,7 +15,11 @@ import { TopicService } from 'src/app/services/topic.service';
   templateUrl: './new-post.component.html',
   styleUrls: ['./new-post.component.scss']
 })
-export class NewPostComponent {
+export class NewPostComponent implements OnDestroy {
+  /**
+   * Represents the subscriptions of the component.
+   */
+  private subscription = new Subscription();
 
   /**
    * Observable that emits the list of topics.
@@ -42,11 +47,12 @@ export class NewPostComponent {
    */
   public submit(): void {
     const post = this.form.value as unknown as Post;
-    this.postsService.createPost(post).subscribe(
+    const sub = this.postsService.createPost(post).subscribe(
       () => {
         this.router.navigate(['/posts/feed']);
       }
     );
+    this.subscription.add(sub);
   }
 
   /**
@@ -54,5 +60,12 @@ export class NewPostComponent {
    */
   back() {
     window.history.back();
+  }
+
+  /**
+   * Unsubscribes from the subscriptions.
+   */
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

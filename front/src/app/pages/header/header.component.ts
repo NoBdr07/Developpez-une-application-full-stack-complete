@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/session.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 /**
  * Represents the HeaderComponent of the application.
@@ -10,7 +11,12 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
+  /**
+   * Represents the subscriptions of the component.
+   */
+  private subscriptions = new Subscription();
 
   /**
    * Represents the logged-in status of the user.
@@ -40,7 +46,7 @@ export class HeaderComponent implements OnInit {
    * Initializes the component.
    */
   ngOnInit(): void {
-    this.sessionService.$isLogged().subscribe((isLogged: boolean) => {
+    const sub = this.sessionService.$isLogged().subscribe((isLogged: boolean) => {
       this.isLogged = isLogged;
     });
   }
@@ -66,5 +72,12 @@ export class HeaderComponent implements OnInit {
    */
   isAuthMePage(): boolean {
     return this.router.url === '/me';
+  }
+
+  /**
+   * Unsubscribe to observable when the component is destroyed.
+   */
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

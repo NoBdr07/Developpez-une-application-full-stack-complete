@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder } from '@angular/forms';
@@ -6,6 +6,7 @@ import { LoginRequest } from 'src/app/pages/auth/interfaces/loginRequest.interfa
 import { AuthSuccess } from 'src/app/pages/auth/interfaces/authSucess.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Represents the LoginComponent class.
@@ -16,7 +17,13 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent { 
+export class LoginComponent implements OnDestroy { 
+
+  /**
+   * Represents the subscriptions of the component.
+   */
+  private subscriptions = new Subscription();
+
   /**
    * Represents whether an error occurred during login.
    */
@@ -50,7 +57,7 @@ export class LoginComponent {
    */
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
-    this.authService.login(loginRequest).subscribe(
+    const sub = this.authService.login(loginRequest).subscribe(
       (response: AuthSuccess) => {
         localStorage.setItem('token', response.token);
         this.authService.me().subscribe((user: User) => {
@@ -61,5 +68,13 @@ export class LoginComponent {
       },
       error => this.onError = true
     );
+    this.subscriptions.add(sub);
+  }
+
+   /**
+   * Unsubscribe to observable when the component is destroyed.
+   */
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

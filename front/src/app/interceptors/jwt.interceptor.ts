@@ -44,7 +44,7 @@ export class JwtInterceptor implements HttpInterceptor {
           // Redirect to home page with queryParams indicating session expiration
           this.router.navigate(['/'], { queryParams: { sessionExpired: true } });
         }
-        return throwError(() => new Error(error.message));
+        return throwError(() => error);
       })
     );
   }

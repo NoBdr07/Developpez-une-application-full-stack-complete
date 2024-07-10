@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginRequest } from '../pages/auth/interfaces/loginRequest.interface';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { AuthSuccess } from '../pages/auth/interfaces/authSucess.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { RegisterRequest } from '../pages/auth/interfaces/registerRequest.interface';
@@ -24,8 +24,13 @@ export class AuthService {
    * @param registerRequest The registration request data.
    * @returns An observable that emits the authentication success response.
    */
-  public register(registerRequest: RegisterRequest): Observable<AuthSuccess> {
-    return this.http.post<AuthSuccess>(`${this.pathService}/register`, registerRequest);
+  register(registerRequest: RegisterRequest): Observable<any> {
+    return this.http.post<any>(`${this.pathService}/register`, registerRequest).pipe(
+      catchError((error) => {
+        const errorMsg = error.error.message || 'Une erreur a eu lieu lors de l\'inscription';
+        return throwError(() => errorMsg);
+      })
+    );
   }
 
   /**

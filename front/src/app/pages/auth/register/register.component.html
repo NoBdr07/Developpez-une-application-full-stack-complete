@@ -22,5 +22,7 @@
       <p class="invalidMessage" *ngIf="form.get('password')?.errors?.['pattern'] && form.get('password')?.dirty" >Le mot de passe doit contenir au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial.</p>
     </div>
   
+    <p class="invalidMessage" *ngIf="errorMessage">{{ errorMessage }}</p>
+
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">S'inscrire</button>
   </form>

@@ -2,27 +2,33 @@
  * Represents the RegisterComponent class.
  * This component is responsible for handling user registration.
  */
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterRequest } from '../interfaces/registerRequest.interface';
+import { catchError, Subscription, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
+  /**
+   * A subscription to handle the component's subscriptions.
+   */
+  private subscriptions = new Subscription();
+
   /**
    * Represents the flag indicating whether an error occurred during registration.
    */
-  public onError = false;
+  public errorMessage: string | null = null;
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router,
+    private router: Router
   ) {}
 
   /**
@@ -57,9 +63,21 @@ export class RegisterComponent {
    */
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
-    this.authService.register(registerRequest).subscribe(() => {
-      this.router.navigate(['/auth/login']);
+    const sub = this.authService.register(registerRequest).subscribe({
+      next: () => {
+        this.router.navigate(['/auth/login']);
+      },
+      error: (errorMsg) => {
+        this.errorMessage = errorMsg;
+      },
     });
-    (_error: any) => (this.onError = true);
+    this.subscriptions.add(sub);
+  }
+
+  /**
+   * Unsubscribe to observable when the component is destroyed.
+   */
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

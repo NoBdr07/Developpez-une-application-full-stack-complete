@@ -1,16 +1,21 @@
 /**
  * Represents the ListComponent class that displays a list of topics.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TopicService } from '../../../services/topic.service';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
+
+  /**
+   * Represents all the subscriptions of the component.
+   */
+  private subs = new Subscription();
 
   /**
    * Represents an observable of topics.
@@ -51,12 +56,20 @@ export class ListComponent implements OnInit {
    * @param topicId - The ID of the topic to subscribe to.
    */
   subscribe(topicId: number): void {
-    this.topicService.subscribe(topicId).subscribe(() => {
+    const sub = this.topicService.subscribe(topicId).subscribe(() => {
       this.mergeTopicsAndSubscriptions();
     });
+    this.subs.add(sub);
   }
 
   ngOnInit(): void {
     this.mergeTopicsAndSubscriptions();
+  }
+
+  /**
+   * Unsubscribes from all subscriptions when the component is destroyed.
+   */
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }
