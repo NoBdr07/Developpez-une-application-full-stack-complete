@@ -26,7 +26,7 @@
           >Date : {{ post.createdAt | date : "longDate" }}</span
         >
         <span class="auteur">Auteur : {{ post.user.username }}</span>
-        <p id="text">{{ post.content }}</p>
+        <p id="text" [innerHTML]="post.content"></p>
       </mat-card-content>
     </mat-card>
   </div>

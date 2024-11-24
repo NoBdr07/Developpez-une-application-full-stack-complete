@@ -6,6 +6,7 @@ import { PostsService } from '../../../services/posts.service';
 import { Observable, map } from 'rxjs';
 import { Post } from 'src/app/interfaces/post.interface';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-feed',
@@ -31,8 +32,19 @@ export class FeedComponent {
 
   constructor(
     private postsService: PostsService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private sanitizer: DomSanitizer
+  ) { 
+     // Application de la sanitization au moment de la récupération des posts
+     this.posts$ = this.postsService.getPosts().pipe(
+      map(posts =>
+        posts.map(post => ({
+          ...post,
+          content: this.sanitizer.sanitize(1, post.content) || '' // Nettoie le contenu HTML
+        }))
+      )
+    );
+  }
 
   /**
    * Navigates to the create post page.

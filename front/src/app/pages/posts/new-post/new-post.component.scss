@@ -22,10 +22,10 @@ img:hover {
 
 .login-form {
     display: flex;
+    height: fit-content;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    height: 80%;
+    gap: 20px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size : 1.2rem;
     @media (max-width: 768px) {
@@ -44,7 +44,7 @@ input {
 }
 
 .content {
-    width: 310px;
+    width: 70%;
     border-radius: 5px;
     border: 1px solid #7550ec;
     font-size: 1.2rem;

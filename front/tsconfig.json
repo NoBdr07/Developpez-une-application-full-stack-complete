@@ -9,6 +9,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -23,7 +24,7 @@
     ],
     "paths": {
        "rxjs": ["./node_modules/rxjs/dist/esm/index"]
-          }
+          },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -35,11 +35,12 @@ export class NewPostComponent implements OnDestroy {
     content: ['', [Validators.required, Validators.minLength(50)]],
   });
 
+
   constructor(
     private postsService: PostsService,
     private fb: FormBuilder,
     private router: Router,
-    private topicService: TopicService
+    private topicService: TopicService,
   ) { }
 
   /**
@@ -54,6 +55,16 @@ export class NewPostComponent implements OnDestroy {
     );
     this.subscription.add(sub);
   }
+  /**
+   * 
+   * Method to update content 
+   */
+
+  onContentChange(event: any): void {
+    const editorContent = event.target.innerHTML; // Récupère le contenu de Trix
+    this.form.patchValue({ content: editorContent }); // Mets à jour le champ "content" dans le formulaire
+  }
+  
 
   /**
    * Navigates back to the previous page.

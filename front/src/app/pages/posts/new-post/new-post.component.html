@@ -3,7 +3,7 @@
   <p id="title">Créer un nouvel article</p>
 
   <mat-form-field appearance="fill">
-    <mat-select placeholder="Sélectionner un thème"  formControlName="topic">
+    <mat-select placeholder="Sélectionner un thème" formControlName="topic">
       <mat-option *ngFor="let topic of topics$ | async" [value]="topic">
         {{ topic.name }}
       </mat-option>
@@ -11,12 +11,47 @@
   </mat-form-field>
 
   <input matInput placeholder="Titre de l'article" formControlName="title" />
-  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['required'] && form.get('title')?.dirty" >Le titre est requis.</p>
-  <p class="invalidMessage" *ngIf="form.get('title')?.errors?.['minlength'] && form.get('title')?.dirty" >Le titre doit faire minimum 5 charactères.</p>
-  
-  <textarea matInput class="content" placeholder="Contenu de l'article" formControlName="content"> </textarea>
-  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['required'] && form.get('content')?.dirty" >Le contenu est requis.</p>
-  <p class="invalidMessage" *ngIf="form.get('content')?.errors?.['minlength'] && form.get('content')?.dirty" >Le contenu doit faire minimum 50 caractères.</p>
+  <p
+    class="invalidMessage"
+    *ngIf="form.get('title')?.errors?.['required'] && form.get('title')?.dirty"
+  >
+    Le titre est requis.
+  </p>
+  <p
+    class="invalidMessage"
+    *ngIf="form.get('title')?.errors?.['minlength'] && form.get('title')?.dirty"
+  >
+    Le titre doit faire minimum 5 charactères.
+  </p>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Créer</button>
+  <div class="content">
+    <trix-editor
+      input="trix-content"
+      (trix-change)="onContentChange($event)"
+    ></trix-editor>
+    <!-- Ce champ caché permettra de lier le contenu à ton formulaire Angular -->
+    <input id="trix-content" type="hidden" formControlName="content" />
+  </div>
+
+  <p
+    class="invalidMessage"
+    *ngIf="form.get('content')?.errors?.['required'] && form.get('content')?.dirty"
+  >
+    Le contenu est requis.
+  </p>
+  <p
+    class="invalidMessage"
+    *ngIf="form.get('content')?.errors?.['minlength'] && form.get('content')?.dirty"
+  >
+    Le contenu doit faire minimum 50 caractères.
+  </p>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!form.valid"
+  >
+    Créer
+  </button>
 </form>

@@ -1,8 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, SecurityContext } from '@angular/core';
 import { PostsService } from '../../../services/posts.service';
 import { CommentsService } from '../../../services/comments.service';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 /**
  * Represents the PostComponent which displays a single post and its comments.
@@ -12,11 +13,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
 })
-export class PostComponent implements OnDestroy{
+export class PostComponent implements OnInit, OnDestroy {
 
   constructor(
     private postService: PostsService,
     private commentsService: CommentsService,
+    private sanitizer: DomSanitizer
   ) {}
 
   /**
@@ -33,7 +35,21 @@ export class PostComponent implements OnDestroy{
    * The observable representing the post.
    */
   public post$ = this.postService.getPost(this.postId);
+  public content: SafeHtml | null = null;
 
+  ngOnInit(): void {
+      const sub = this.postService.getPost(this.postId).subscribe((post) => {
+        const sanitizedContent = this.sanitizer.sanitize(SecurityContext.HTML, post.content);
+        
+        if (sanitizedContent) {
+          this.content = this.sanitizer.bypassSecurityTrustHtml(sanitizedContent);
+        } else {
+          console.error('Sanitization failed');
+          this.content = null; // Gère le cas où le contenu est invalide
+        }
+      })
+      this.subscriptions.add(sub);
+  }
   /**
    * The observable representing the comments of the post.
    */

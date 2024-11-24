@@ -2,19 +2,19 @@
   <img id="back" src="assets/back.png" alt="back" (click)="back()" />
   <div class="childContainer">
     <div class="postContainer" *ngIf="post$ | async as post">
-      <p class="title">{{ post.title }}</p>
+      <h2>{{ post.title }}</h2>
       <div class="infoContainer">
-        <span>{{ post.createdAt | date }}</span>
-        <span>{{ post.user.username }}</span>
-        <span>{{ post.topic.name }}</span>
+        <span>Date : {{ post.createdAt | date }}</span>
+        <span>Auteur : {{ post.user.username }}</span>
+        <span>Thème : {{ post.topic.name }}</span>
       </div>
-      <p class="content">{{ post.content }}</p>
+      <p class="content" [innerHTML]="content"></p>
     </div>
 
     <hr />
 
     <div class="commentContainer" *ngIf="comments$ | async as comments">
-      <p>Commentaires</p>
+      <h2>Commentaires</h2>
       <div class="comment" *ngFor="let comment of comments">
         <span>{{ comment.user.username }}</span>
         <p class="commentContent">{{ comment.content }}</p>
